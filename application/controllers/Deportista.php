@@ -8,7 +8,7 @@ class Deportista extends CI_Controller {
             $this->carga_layout("lista_deportistas");
         }
 
-        public function carga_layout() 
+        public function carga_layout($template) 
         {
             $this->load->view('header');
             $this->load->view('nav');

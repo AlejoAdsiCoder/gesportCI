@@ -42,10 +42,17 @@ CREATE TABLE `club` (
 -- Estructura de tabla para la tabla `deportes`
 --
 
-CREATE TABLE `deportes` (
-  `id` int(11) NOT NULL,
+CREATE TABLE `deporte` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
   `nombre` varchar(45) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Volcado de datos para la tabla `deporte`
+--
+
+INSERT INTO `deporte` (`nombre`) VALUES
+('Natación'),('Futbol'),('Patinaje'),('Baloncesto'),('Karate')
 
 -- --------------------------------------------------------
 
@@ -135,6 +142,16 @@ CREATE TABLE `escenario` (
   `longitud` float NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
+--
+-- Volcado de datos para la tabla `escenario`
+--
+
+INSERT INTO `escenario` (`id`, `nombre`, `descripcion`, `disponibilidad`, `barrio`, `direccion`, `latitud`, `longitud`) VALUES
+(1, 'coliseo mayor', 'escenario deportivo', 1, 1, 'cra 34 #20-20', 12341300, 98768800),
+(2, 'coliseo menor', 'escenario deportivo', 1, 1, 'cra 23 #20-20', 12234300, 98768800),
+(3, 'futbol5', 'escenario deportivo', 0, 2, 'cll 55 #22-10', 12341300, 98768800),
+(4, 'Multicancha san juan', 'escenario deportivo', 1, 3, 'cra 78 #45-20', 1841320, 98768800);
+
 -- --------------------------------------------------------
 
 --
@@ -142,13 +159,21 @@ CREATE TABLE `escenario` (
 --
 
 CREATE TABLE `horario` (
-  `id` int(11) NOT NULL,
+  `id` int(11) NOT NULL AUTO_INCREMENT,
   `dia` varchar(20) NOT NULL,
   `jornada` varchar(10) NOT NULL,
   `hora_inicio` time NOT NULL,
   `hora_fin` time NOT NULL,
   `escenario_id` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+--
+-- Volcado de datos para la tabla `horario`
+--
+
+INSERT INTO `horario` (`dia`, `jornada`, `hora_inicio`, `hora_fin`, `escenario_id`) VALUES
+('lunes', 'mañana', '09:00:00', '11:00:00', 1),
+('miercoles', 'mañana', '06:00:00', '12:00:00', 2),
+('viernes', 'tarde', '13:00:00', '18:00:00', 3);
 
 -- --------------------------------------------------------
 
