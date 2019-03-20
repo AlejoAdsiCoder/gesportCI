@@ -1,13 +1,15 @@
 -- phpMyAdmin SQL Dump
--- version 4.6.6deb5
+-- version 4.8.0
 -- https://www.phpmyadmin.net/
 --
--- Servidor: localhost:3306
--- Tiempo de generación: 18-03-2019 a las 01:35:07
--- Versión del servidor: 10.1.29-MariaDB-6ubuntu2
--- Versión de PHP: 7.3.3-1+ubuntu18.10.1+deb.sury.org+1
+-- Servidor: 127.0.0.1
+-- Tiempo de generación: 20-03-2019 a las 02:23:14
+-- Versión del servidor: 10.1.31-MariaDB
+-- Versión de PHP: 5.6.35
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
+SET AUTOCOMMIT = 0;
+START TRANSACTION;
 SET time_zone = "+00:00";
 
 
@@ -17,7 +19,7 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Base de datos: `gesport`
+-- Base de datos: `gsport`
 --
 
 -- --------------------------------------------------------
@@ -42,17 +44,10 @@ CREATE TABLE `club` (
 -- Estructura de tabla para la tabla `deportes`
 --
 
-CREATE TABLE `deporte` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
+CREATE TABLE `deportes` (
+  `id` int(11) NOT NULL,
   `nombre` varchar(45) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
---
--- Volcado de datos para la tabla `deporte`
---
-
-INSERT INTO `deporte` (`nombre`) VALUES
-('Natación'),('Futbol'),('Patinaje'),('Baloncesto'),('Karate')
 
 -- --------------------------------------------------------
 
@@ -114,9 +109,9 @@ CREATE TABLE `entrenador` (
   `tipo_documento` int(11) NOT NULL,
   `nombre` varchar(45) NOT NULL,
   `apellidos` varchar(45) NOT NULL,
+  `email` varchar(60) NOT NULL,
   `telefono` int(11) DEFAULT NULL,
   `celular` int(11) NOT NULL,
-  `email` varchar(60) NOT NULL,
   `fecha_nacimiento` date NOT NULL,
   `barrio` varchar(45) NOT NULL,
   `direccion` varchar(45) NOT NULL,
@@ -142,16 +137,6 @@ CREATE TABLE `escenario` (
   `longitud` float NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
---
--- Volcado de datos para la tabla `escenario`
---
-
-INSERT INTO `escenario` (`id`, `nombre`, `descripcion`, `disponibilidad`, `barrio`, `direccion`, `latitud`, `longitud`) VALUES
-(1, 'coliseo mayor', 'escenario deportivo', 1, 1, 'cra 34 #20-20', 12341300, 98768800),
-(2, 'coliseo menor', 'escenario deportivo', 1, 1, 'cra 23 #20-20', 12234300, 98768800),
-(3, 'futbol5', 'escenario deportivo', 0, 2, 'cll 55 #22-10', 12341300, 98768800),
-(4, 'Multicancha san juan', 'escenario deportivo', 1, 3, 'cra 78 #45-20', 1841320, 98768800);
-
 -- --------------------------------------------------------
 
 --
@@ -159,21 +144,13 @@ INSERT INTO `escenario` (`id`, `nombre`, `descripcion`, `disponibilidad`, `barri
 --
 
 CREATE TABLE `horario` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `id` int(11) NOT NULL,
   `dia` varchar(20) NOT NULL,
   `jornada` varchar(10) NOT NULL,
   `hora_inicio` time NOT NULL,
   `hora_fin` time NOT NULL,
   `escenario_id` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
---
--- Volcado de datos para la tabla `horario`
---
-
-INSERT INTO `horario` (`dia`, `jornada`, `hora_inicio`, `hora_fin`, `escenario_id`) VALUES
-('lunes', 'mañana', '09:00:00', '11:00:00', 1),
-('miercoles', 'mañana', '06:00:00', '12:00:00', 2),
-('viernes', 'tarde', '13:00:00', '18:00:00', 3);
 
 -- --------------------------------------------------------
 
@@ -260,6 +237,28 @@ ALTER TABLE `reserva`
   ADD KEY `fk_reserva_escenario1_idx` (`escenario_id`);
 
 --
+-- AUTO_INCREMENT de las tablas volcadas
+--
+
+--
+-- AUTO_INCREMENT de la tabla `deportes`
+--
+ALTER TABLE `deportes`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT de la tabla `escenario`
+--
+ALTER TABLE `escenario`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT de la tabla `horario`
+--
+ALTER TABLE `horario`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+
+--
 -- Restricciones para tablas volcadas
 --
 
@@ -308,6 +307,7 @@ ALTER TABLE `horario`
 ALTER TABLE `reserva`
   ADD CONSTRAINT `fk_reserva_club1` FOREIGN KEY (`club_id`) REFERENCES `club` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
   ADD CONSTRAINT `fk_reserva_escenario1` FOREIGN KEY (`escenario_id`) REFERENCES `escenario` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION;
+COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
