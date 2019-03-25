@@ -1,10 +1,7 @@
-<h2><?php echo $title; ?></h2>
-
-<?php echo validation_errors(); ?>
-
-<?php echo form_open('deportistas/crear_deportista'); ?>
+<h2><?php echo "Prueba"; ?></h2>
 
 <div class="form-group">
+            <div class="form-group col">
                 <label for="">Número identificación</label>
                 <input type="text" class="form-control">
             </div>

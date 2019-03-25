@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: localhost:3306
--- Tiempo de generación: 20-03-2019 a las 01:19:23
+-- Tiempo de generación: 24-03-2019 a las 20:50:29
 -- Versión del servidor: 10.1.29-MariaDB-6ubuntu2
 -- Versión de PHP: 7.3.3-1+ubuntu18.10.1+deb.sury.org+1
 
@@ -76,8 +76,9 @@ CREATE TABLE `deportista` (
   `direccion` varchar(45) NOT NULL,
   `estatura` decimal(10,0) NOT NULL,
   `peso` int(11) NOT NULL,
-  `fecha_registro` date NOT NULL,
-  `deporte` int(11) NOT NULL
+  `deporte` int(11) NOT NULL,
+  `password` varchar(60) NOT NULL,
+  `fecha_registro` date NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
@@ -124,6 +125,7 @@ CREATE TABLE `entrenador` (
   `barrio` varchar(45) NOT NULL,
   `direccion` varchar(45) NOT NULL,
   `deporte` varchar(45) NOT NULL,
+  `password` varchar(60) NOT NULL,
   `fecha_registro` date NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
@@ -281,7 +283,7 @@ ALTER TABLE `escenario`
 -- AUTO_INCREMENT de la tabla `horario`
 --
 ALTER TABLE `horario`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 --
 -- Restricciones para tablas volcadas
 --

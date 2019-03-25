@@ -14,4 +14,9 @@ class Deportista extends CI_Controller {
             $this->load->view('nav');
             $this->load->view($template);
         }
+
+        public function crearDeportista() {
+            $this->carga_layout("deportistas/crear_deportista");
+        }
+
 }
