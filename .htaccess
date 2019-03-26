@@ -1,4 +1,4 @@
 AddDefaultCharset UTF-8
 RewriteEngine on
 RewriteCond $1 !^(index.php|css|assets|js|images|logos|info|uploads|docs|SpryAssets|robots.txt)
-RewriteRule ^(.*)$ /gesport/index.php/$1 [L]
+RewriteRule ^(.*)$ /gesportCI/index.php/$1 [L]

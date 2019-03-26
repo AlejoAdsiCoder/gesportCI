@@ -23,26 +23,31 @@
               </tr>
             </thead>
             <tbody>
+            
+            <?php
+            foreach($deportistas_data as $row)
+            {
+
+              echo '
               <tr>
-                <th scope="row">1</th>
-                <td>Mark</td>
-                <td>Otto</td>
-                <td>@mdo</td>
-                <td><button type="button" class="btn btn-primary btn-sm"><i class="fas fa-trash-alt"></i></button></td>
-                <td><button type="button" class="btn btn-primary btn-sm"><i class="fas fa-edit"></i></button></td>
+                <td>'.$row->cedula.'</td>
+                <td>'.$row->tipo_documento.'</td>
+                <td>'.$row->nombre.'</td>
+                <td>'.$row->apellidos.'</td>
+                <td>'.$row->telefono.'</td>
+                <td>'.$row->celular.'</td>
+                <td>'.$row->email.'</td>
+                <td>'.$row->fecha_nacimiento.'</td>
+                <td>'.$row->barrio.'</td>
+                <td>'.$row->direccion.'</td>
+                <td>'.$row->estatura.'</td>
+                <td>'.$row->peso.'</td>
+                <td>'.$row->deporte.'</td>
+                <td>'.$row->password.'</td>
               </tr>
-              <tr>
-                <th scope="row">2</th>
-                <td>Jacob</td>
-                <td>Thornton</td>
-                <td>@fat</td>
-              </tr>
-              <tr>
-                <th scope="row">3</th>
-                <td>Larry</td>
-                <td>the Bird</td>
-                <td>@twitter</td>
-              </tr>
+              ';
+            }
+            ?>
             </tbody>
           </table>
     </div>
