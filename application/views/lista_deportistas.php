@@ -1,4 +1,4 @@
-<div class="container">
+<div class="container-fluid">
 <div class="card">
   <div class="card-header">
   <i class="fas fa-user"></i>Lista de Deportistas
@@ -6,20 +6,24 @@
   </div>
   <div class="card-body">
     <div class="side col-md-8">
-    <table class="table">
+    <table class="table table-sm">
             <thead>
               <tr>
                 <th scope="col">#</th>
                 <th scope="col">Tipo documento</th>
                 <th scope="col">Nombre</th>
-                <th scope="col">Apellido</th>
+                <th scope="col">Apellidos</th>
+                <th scope="col">Telefono</th>
+                <th scope="col">Celular</th>
+                <th scope="col">Email</th>
                 <th scope="col">Fecha Nacimiento</th>
-                <th scope="col">E-mail</th>
-                <th scope="col">Deporte</th>
                 <th scope="col">Barrio</th>
                 <th scope="col">Dirección</th>
                 <th scope="col">Estatura</th>
                 <th scope="col">Peso</th>
+                <th scope="col">Deporte</th>
+                <th scope="col">Password</th>
+                <th scope="col">Más</th>
               </tr>
             </thead>
             <tbody>
@@ -44,12 +48,107 @@
                 <td>'.$row->peso.'</td>
                 <td>'.$row->deporte.'</td>
                 <td>'.$row->password.'</td>
+                <td><a href='.base_url().'Deportista/editar_deportista/'.$row->cedula.' class="btn btn-primary" data-toggle="modal" data-target="#edit"><i class="far fa-edit"></i></a></td>
+                
               </tr>
               ';
             }
             ?>
             </tbody>
           </table>
+          <div class="modal fade" id="edit" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+                  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                  <span aria-hidden="true">&times;</span>
+                  </button>
+                </div>
+                  <div class="modal-body">
+                    <form action="<?php echo base_url() ?>Deportista/nuevoDeportista" method="post">
+            <div class="form-group">
+                <label for="">Tipo documento</label>
+                <select class="form-control" name="tipodoc">
+                    <option value="cc">Cédula de ciudadania</option>
+                    <option value="ti">Tarjeta de identidad</option>
+                    <option value="ce">Cédula de extranjeria</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="">Número identificación</label>
+                <input type="text" class="form-control" name="cedula">
+            </div>
+            <div class="form-row">
+                <div class="form-group col">
+                    <label for="">Nombre</label>
+                    <input type="text" name="nombres" class="form-control">
+                </div>
+                <div class="form-group col">
+                    <label for="">Apellidos</label>
+                    <input type="text" name="apellidos" class="form-control">
+                </div>
+            </div>
+            
+            <div class="form-group">
+                <label for="">Teléfono</label>
+                <input type="text" name="tel" class="form-control">
+            </div>
+            <div class="form-group">
+                <label for="">Celular</label>
+                <input type="text" name="cel" class="form-control">
+            </div>
+            <div class="form-group">
+                <label for="">Correo Electrónico</label>
+                <input type="text" name="email" class="form-control">
+            </div>
+            <div class="form-group">
+                <label for="">Contraseña</label>
+                <input type="password" name="pass" class="form-control">
+            </div>
+            <div class="form-group">
+                <label for="">Deporte</label>
+                <select name="deporte" name="deporte" class="form-control">
+                    <option value="1">Baloncesto</option>
+                    <option value="2">Futbol</option>
+                    <option value="3">Natación</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="">Fecha nacimiento</label>
+                <input type="date" class="form-control" name="fechanac">
+            </div>
+            <div class="form-group">
+                <label for="">Barrio</label>
+                <input type="text" class="form-control" name="barrio">
+            </div>
+
+            <div class="form-group">
+                <label for="">Dirección</label>
+                <input type="text" class="form-control" name="direccion">
+            </div>
+
+            <div class="form-row">
+                <div class="form-group col-md-6">
+                    <label for="">Estatura</label>
+                    <input type="text" name="estatura" class="form-control">   
+                </div>
+                <div class="form-group col-md-6">
+                    <label for="">Peso</label>
+                    <input type="text" name="peso" class="form-control"> 
+                </div>
+            </div>
+
+    <input type="submit" name="submit" value="Crear" />
+    </form>
+                  </div>
+                <div class="modal-footer">
+                  <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                  <button type="button" class="btn btn-primary">Save changes</button>
+              </div>
+            </div>
+          </div>
+      </div>
     </div>
   </div>
 </div>
