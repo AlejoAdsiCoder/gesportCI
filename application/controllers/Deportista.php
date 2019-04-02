@@ -39,4 +39,26 @@ class Deportista extends CI_Controller {
            // redirect('/paciente');
         }
 
+        public function edit($cedula)
+        {
+            $this->load->database();
+            $q = $this->db->get_where('deportista', array('cedula' => $cedula));
+            echo json_encode($q->row());
+        }
+
+        public function update($id)
+        {
+            $this->load->database();
+
+            $insert = $this->input->post();
+            $this->db->where('cedula', $cedula);
+            $this->db->update('deportista', $insert);
+            $q = $this->db->get_where('deportista', array('cedula' => $cedula));
+
+
+            echo json_encode($insert);
+        }
+
+}
+
 }

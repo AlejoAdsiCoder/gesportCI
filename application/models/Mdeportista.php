@@ -35,4 +35,3 @@ public function lista() {
     return $query->result();
 }
 
-}

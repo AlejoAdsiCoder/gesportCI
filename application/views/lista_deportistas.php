@@ -66,10 +66,13 @@
                   </button>
                 </div>
                   <div class="modal-body">
-                    <form action="<?php echo base_url() ?>Deportista/nuevoDeportista" method="post">
+                    <form action="<?php echo base_url(); ?>Deportista/nuevoDeportista" method="post">
+                    <?php
+                    foreach($deportistas_data as $row)
+                    { ?>
             <div class="form-group">
                 <label for="">Tipo documento</label>
-                <select class="form-control" name="tipodoc">
+                <select class="form-control"  name="tipodoc">
                     <option value="cc">Cédula de ciudadania</option>
                     <option value="ti">Tarjeta de identidad</option>
                     <option value="ce">Cédula de extranjeria</option>
@@ -77,34 +80,34 @@
             </div>
             <div class="form-group">
                 <label for="">Número identificación</label>
-                <input type="text" class="form-control" name="cedula">
+                <input type="text" value="<?php echo $row->cedula; ?>" class="form-control" name="cedula">
             </div>
             <div class="form-row">
                 <div class="form-group col">
                     <label for="">Nombre</label>
-                    <input type="text" name="nombres" class="form-control">
+                    <input type="text" name="nombres" value="<?php echo $row->nombre; ?>" class="form-control">
                 </div>
                 <div class="form-group col">
                     <label for="">Apellidos</label>
-                    <input type="text" name="apellidos" class="form-control">
+                    <input type="text" name="apellidos" value="<?php echo $row->apellidos; ?>" class="form-control">
                 </div>
             </div>
             
             <div class="form-group">
                 <label for="">Teléfono</label>
-                <input type="text" name="tel" class="form-control">
+                <input type="text" name="tel" value="<?php echo $row->telefono; ?>" class="form-control">
             </div>
             <div class="form-group">
                 <label for="">Celular</label>
-                <input type="text" name="cel" class="form-control">
+                <input type="text" name="cel" value="<?php echo $row->celular; ?>" class="form-control">
             </div>
             <div class="form-group">
                 <label for="">Correo Electrónico</label>
-                <input type="text" name="email" class="form-control">
+                <input type="text" name="email" value="<?php echo $row->email; ?>" class="form-control">
             </div>
             <div class="form-group">
                 <label for="">Contraseña</label>
-                <input type="password" name="pass" class="form-control">
+                <input type="password" name="pass" value="<?php echo $row->password; ?>" class="form-control">
             </div>
             <div class="form-group">
                 <label for="">Deporte</label>
@@ -116,31 +119,32 @@
             </div>
             <div class="form-group">
                 <label for="">Fecha nacimiento</label>
-                <input type="date" class="form-control" name="fechanac">
+                <input type="date" class="form-control" value="<?php echo $row->fecha_nacimiento; ?>" name="fechanac">
             </div>
             <div class="form-group">
                 <label for="">Barrio</label>
-                <input type="text" class="form-control" name="barrio">
+                <input type="text" class="form-control" value="<?php echo $row->barrio; ?>" name="barrio">
             </div>
 
             <div class="form-group">
                 <label for="">Dirección</label>
-                <input type="text" class="form-control" name="direccion">
+                <input type="text" class="form-control" value="<?php echo $row->direccion; ?>" name="direccion">
             </div>
 
             <div class="form-row">
                 <div class="form-group col-md-6">
                     <label for="">Estatura</label>
-                    <input type="text" name="estatura" class="form-control">   
+                    <input type="text" name="estatura" value="<?php echo $row->estatura; ?>" class="form-control">   
                 </div>
                 <div class="form-group col-md-6">
                     <label for="">Peso</label>
-                    <input type="text" name="peso" class="form-control"> 
+                    <input type="text" name="peso" value="<?php echo $row->peso; ?>" class="form-control"> 
                 </div>
             </div>
 
-    <input type="submit" name="submit" value="Crear" />
-    </form>
+            <input type="submit" name="submit" value="Crear" />
+            </form>
+                    <?php } ?>
                   </div>
                 <div class="modal-footer">
                   <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
