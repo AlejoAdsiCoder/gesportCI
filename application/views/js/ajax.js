@@ -1,14 +1,21 @@
-$("body").on("click",".edit-item",function(){
+$("body").on("click",".edit-dep",function(){
+    var url = "http://localhost/gesportCI/edit";
+    var dep_id = $(this).val();
 
-
-    var id = $(this).parent("td").data('id');
-    var title = $(this).parent("td").prev("td").prev("td").text();
-    var description = $(this).parent("td").prev("td").text();
-
-
-    $("#edit-item").find("input[name='title']").val(title);
-    $("#edit-item").find("textarea[name='description']").val(description);
-    $("#edit-item").find("form").attr("action",url + '/update/' + id);
-
-
+    $.get(url + '/' + dep_id, function(data) {
+        $('#tp').val(data.tipo_documento);
+        $('#id').val(data.cedula);
+        $('#nom').val(data.nombre);
+        $('#ape').val(data.apellidos);
+        $('#tel').val(data.telefono);
+        $('#cel').val(data.celular);
+        $('#email').val(data.email);
+        $('#pass').val(data.password);
+        $('#deporte').val(data.deporte);
+        $('#date').val(data.fecha_nacimiento);
+        $('#barrio').val(data.barrio);
+        $('#dir').val(data.direccion);
+        $('#est').val(data.estatura);
+        $('#peso').val(data.peso);
+    })
 });

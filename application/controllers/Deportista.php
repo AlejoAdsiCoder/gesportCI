@@ -61,4 +61,3 @@ class Deportista extends CI_Controller {
 
 }
 
-}
