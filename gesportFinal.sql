@@ -1,13 +1,15 @@
 -- phpMyAdmin SQL Dump
--- version 4.6.6deb5
+-- version 4.8.0
 -- https://www.phpmyadmin.net/
 --
--- Servidor: localhost:3306
--- Tiempo de generación: 18-03-2019 a las 01:35:07
--- Versión del servidor: 10.1.29-MariaDB-6ubuntu2
--- Versión de PHP: 7.3.3-1+ubuntu18.10.1+deb.sury.org+1
+-- Servidor: 127.0.0.1
+-- Tiempo de generación: 06-04-2019 a las 03:14:26
+-- Versión del servidor: 10.1.31-MariaDB
+-- Versión de PHP: 5.6.35
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
+SET AUTOCOMMIT = 0;
+START TRANSACTION;
 SET time_zone = "+00:00";
 
 
@@ -42,17 +44,20 @@ CREATE TABLE `club` (
 -- Estructura de tabla para la tabla `deportes`
 --
 
-CREATE TABLE `deporte` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
+CREATE TABLE `deportes` (
+  `id` int(11) NOT NULL,
   `nombre` varchar(45) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
--- Volcado de datos para la tabla `deporte`
+-- Volcado de datos para la tabla `deportes`
 --
 
-INSERT INTO `deporte` (`nombre`) VALUES
-('Natación'),('Futbol'),('Patinaje'),('Baloncesto'),('Karate')
+INSERT INTO `deportes` (`id`, `nombre`) VALUES
+(1, 'Natación'),
+(2, 'Baloncesto'),
+(3, 'Futbol'),
+(4, 'Patinaje');
 
 -- --------------------------------------------------------
 
@@ -73,9 +78,18 @@ CREATE TABLE `deportista` (
   `direccion` varchar(45) NOT NULL,
   `estatura` decimal(10,0) NOT NULL,
   `peso` int(11) NOT NULL,
-  `fecha_registro` date NOT NULL,
-  `deporte` int(11) NOT NULL
+  `deporte` int(11) NOT NULL,
+  `password` varchar(60) NOT NULL,
+  `fecha_registro` date NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Volcado de datos para la tabla `deportista`
+--
+
+INSERT INTO `deportista` (`cedula`, `tipo_documento`, `nombre`, `apellidos`, `telefono`, `celular`, `email`, `fecha_nacimiento`, `barrio`, `direccion`, `estatura`, `peso`, `deporte`, `password`, `fecha_registro`) VALUES
+(23498759, 0, 'Juan esteban', 'Marin', 331452453, 342340912, 'jmc@gmail.com', '2019-04-20', 'otun', 'cra 45 3234', '168', 50, 3, '12345', '0000-00-00'),
+(1053830338, 0, 'Alejandro', 'P Cardona', 345663246, 23452345, 'apatino@seedem.co', '1993-10-15', 'san jorge', 'cl 46a #20-55', '170', 50, 1, '413j0', '0000-00-00');
 
 -- --------------------------------------------------------
 
@@ -114,13 +128,14 @@ CREATE TABLE `entrenador` (
   `tipo_documento` int(11) NOT NULL,
   `nombre` varchar(45) NOT NULL,
   `apellidos` varchar(45) NOT NULL,
+  `email` varchar(60) NOT NULL,
   `telefono` int(11) DEFAULT NULL,
   `celular` int(11) NOT NULL,
-  `email` varchar(60) NOT NULL,
   `fecha_nacimiento` date NOT NULL,
   `barrio` varchar(45) NOT NULL,
   `direccion` varchar(45) NOT NULL,
   `deporte` varchar(45) NOT NULL,
+  `password` varchar(60) NOT NULL,
   `fecha_registro` date NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
@@ -136,7 +151,7 @@ CREATE TABLE `escenario` (
   `deporte` int(11) NOT NULL,
   `descripcion` varchar(45) NOT NULL,
   `disponibilidad` varchar(45) NOT NULL,
-  `barrio` int(11) NOT NULL,
+  `barrio` varchar(45) NOT NULL,
   `direccion` varchar(45) NOT NULL,
   `latitud` float NOT NULL,
   `longitud` float NOT NULL
@@ -146,11 +161,11 @@ CREATE TABLE `escenario` (
 -- Volcado de datos para la tabla `escenario`
 --
 
-INSERT INTO `escenario` (`id`, `nombre`, `descripcion`, `disponibilidad`, `barrio`, `direccion`, `latitud`, `longitud`) VALUES
-(1, 'coliseo mayor', 'escenario deportivo', 1, 1, 'cra 34 #20-20', 12341300, 98768800),
-(2, 'coliseo menor', 'escenario deportivo', 1, 1, 'cra 23 #20-20', 12234300, 98768800),
-(3, 'futbol5', 'escenario deportivo', 0, 2, 'cll 55 #22-10', 12341300, 98768800),
-(4, 'Multicancha san juan', 'escenario deportivo', 1, 3, 'cra 78 #45-20', 1841320, 98768800);
+INSERT INTO `escenario` (`id`, `nombre`, `deporte`, `descripcion`, `disponibilidad`, `barrio`, `direccion`, `latitud`, `longitud`) VALUES
+(1, 'coliseo mayor', 1, 'escenario deportivo', '1', 'villapilar', 'cra 34 #20-20', 12341300, 98768800),
+(2, 'coliseo menor', 1, 'escenario deportivo', '1', 'san jorge', 'cra 23 #20-20', 12234300, 98768800),
+(3, 'futbol5', 3, 'escenario deportivo', '2', 'colinas', 'cll 55 #22-10', 12341300, 98768800),
+(4, 'Multicancha san juan', 2, 'escenario deportivo', '3', 'la leonora', 'cra 78 #45-20', 1841320, 98768800);
 
 -- --------------------------------------------------------
 
@@ -159,21 +174,22 @@ INSERT INTO `escenario` (`id`, `nombre`, `descripcion`, `disponibilidad`, `barri
 --
 
 CREATE TABLE `horario` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `id` int(11) NOT NULL,
   `dia` varchar(20) NOT NULL,
   `jornada` varchar(10) NOT NULL,
   `hora_inicio` time NOT NULL,
   `hora_fin` time NOT NULL,
   `escenario_id` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
 --
 -- Volcado de datos para la tabla `horario`
 --
 
-INSERT INTO `horario` (`dia`, `jornada`, `hora_inicio`, `hora_fin`, `escenario_id`) VALUES
-('lunes', 'mañana', '09:00:00', '11:00:00', 1),
-('miercoles', 'mañana', '06:00:00', '12:00:00', 2),
-('viernes', 'tarde', '13:00:00', '18:00:00', 3);
+INSERT INTO `horario` (`id`, `dia`, `jornada`, `hora_inicio`, `hora_fin`, `escenario_id`) VALUES
+(1, 'lunes', 'manana', '09:00:00', '11:00:00', 1),
+(2, 'miercoles', 'manana', '06:00:00', '12:00:00', 2),
+(3, 'viernes', 'tarde', '13:00:00', '18:00:00', 3);
 
 -- --------------------------------------------------------
 
@@ -260,6 +276,28 @@ ALTER TABLE `reserva`
   ADD KEY `fk_reserva_escenario1_idx` (`escenario_id`);
 
 --
+-- AUTO_INCREMENT de las tablas volcadas
+--
+
+--
+-- AUTO_INCREMENT de la tabla `deportes`
+--
+ALTER TABLE `deportes`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+
+--
+-- AUTO_INCREMENT de la tabla `escenario`
+--
+ALTER TABLE `escenario`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+
+--
+-- AUTO_INCREMENT de la tabla `horario`
+--
+ALTER TABLE `horario`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+
+--
 -- Restricciones para tablas volcadas
 --
 
@@ -308,6 +346,7 @@ ALTER TABLE `horario`
 ALTER TABLE `reserva`
   ADD CONSTRAINT `fk_reserva_club1` FOREIGN KEY (`club_id`) REFERENCES `club` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
   ADD CONSTRAINT `fk_reserva_escenario1` FOREIGN KEY (`escenario_id`) REFERENCES `escenario` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION;
+COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;

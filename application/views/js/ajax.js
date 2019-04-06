@@ -1,8 +1,26 @@
 $("body").on("click",".edit-dep",function(){
-    var url = "http://localhost/gesportCI/edit";
+    var url = "<?php echo base_url() ?>gesportCI/edit";
     var dep_id = $(this).val();
 
-    $.get(url + '/' + dep_id, function(data) {
+    $.ajax({
+            url: "php/getDetalles.php?" + dataString,
+                    success: function (escData) {
+                        if(escData) {
+                            var datos = JSON.parse(escData);
+                            alert(escData);
+                            alert(datos[0].dia);
+                            for(i = 0; i < datos.length; i++) {
+                                if(datos[i].dia == "lunes"){
+                                    $("#lun").html("<li>" + datos[i].hora_inicio + "</li><li>" + datos[i].hora_fin);
+                                }
+                            }
+                        }
+                        else
+                        alert("Nanay");
+                    }
+                });
+
+    $.getJSON(url + '/' + dep_id, function(data) {
         $('#tp').val(data.tipo_documento);
         $('#id').val(data.cedula);
         $('#nom').val(data.nombre);

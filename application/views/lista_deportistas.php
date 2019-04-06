@@ -154,15 +154,46 @@
   </div>
 </div>
 </div>
-<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
-<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
-<script>
-    $("body").on("click",".edit-dep",function(){
-    var url = "http://localhost/gesportCI/edit";
-    var dep_id = $(this).val();
 
-    $.get(url + '/' + dep_id, function(data) {
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+
+<script>
+$(document).ready(function() {
+    $("body").on("click",".edit-dep",function() {
+    var url = '<?php echo base_url() ?>Deportista/edit';
+    
+    var dep_id = $(this).val();
+    alert(url + '/' + dep_id);
+
+     $.ajax({
+        url: url + '/' + dep_id,
+        success: function (data) {
+        if(data) {
+            var datos = JSON.parse(data);
+                alert(data);
+                $('#tp').val(data.tipo_documento);
+                $('#id').val(data.cedula);
+                $('#nom').val(data.nombre);
+                $('#ape').val(data.apellidos);
+                $('#tel').val(data.telefono);
+                $('#cel').val(data.celular);
+                $('#email').val(data.email);
+                $('#pass').val(data.password);
+                $('#deporte').val(data.deporte);
+                $('#date').val(data.fecha_nacimiento);
+                $('#barrio').val(data.barrio);
+                $('#dir').val(data.direccion);
+                $('#est').val(data.estatura);
+                $('#peso').val(data.peso);
+                }
+            else
+                alert("Nanay");
+            }
+        });
+/*
+    $.getJSON(url + '/' + dep_id, function(data) {
         $('#tp').val(data.tipo_documento);
         $('#id').val(data.cedula);
         $('#nom').val(data.nombre);
@@ -177,6 +208,8 @@
         $('#dir').val(data.direccion);
         $('#est').val(data.estatura);
         $('#peso').val(data.peso);
+    });
+*/
     });
 });
 </script>

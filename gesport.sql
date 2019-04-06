@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 20-03-2019 a las 02:23:14
+-- Tiempo de generación: 06-04-2019 a las 03:14:26
 -- Versión del servidor: 10.1.31-MariaDB
 -- Versión de PHP: 5.6.35
 
@@ -49,6 +49,16 @@ CREATE TABLE `deportes` (
   `nombre` varchar(45) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
+--
+-- Volcado de datos para la tabla `deportes`
+--
+
+INSERT INTO `deportes` (`id`, `nombre`) VALUES
+(1, 'Natación'),
+(2, 'Baloncesto'),
+(3, 'Futbol'),
+(4, 'Patinaje');
+
 -- --------------------------------------------------------
 
 --
@@ -68,9 +78,18 @@ CREATE TABLE `deportista` (
   `direccion` varchar(45) NOT NULL,
   `estatura` decimal(10,0) NOT NULL,
   `peso` int(11) NOT NULL,
-  `fecha_registro` date NOT NULL,
-  `deporte` int(11) NOT NULL
+  `deporte` int(11) NOT NULL,
+  `password` varchar(60) NOT NULL,
+  `fecha_registro` date NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Volcado de datos para la tabla `deportista`
+--
+
+INSERT INTO `deportista` (`cedula`, `tipo_documento`, `nombre`, `apellidos`, `telefono`, `celular`, `email`, `fecha_nacimiento`, `barrio`, `direccion`, `estatura`, `peso`, `deporte`, `password`, `fecha_registro`) VALUES
+(23498759, 0, 'Juan esteban', 'Marin', 331452453, 342340912, 'jmc@gmail.com', '2019-04-20', 'otun', 'cra 45 3234', '168', 50, 3, '12345', '0000-00-00'),
+(1053830338, 0, 'Alejandro', 'P Cardona', 345663246, 23452345, 'apatino@seedem.co', '1993-10-15', 'san jorge', 'cl 46a #20-55', '170', 50, 1, '413j0', '0000-00-00');
 
 -- --------------------------------------------------------
 
@@ -116,6 +135,7 @@ CREATE TABLE `entrenador` (
   `barrio` varchar(45) NOT NULL,
   `direccion` varchar(45) NOT NULL,
   `deporte` varchar(45) NOT NULL,
+  `password` varchar(60) NOT NULL,
   `fecha_registro` date NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
@@ -131,11 +151,21 @@ CREATE TABLE `escenario` (
   `deporte` int(11) NOT NULL,
   `descripcion` varchar(45) NOT NULL,
   `disponibilidad` varchar(45) NOT NULL,
-  `barrio` int(11) NOT NULL,
+  `barrio` varchar(45) NOT NULL,
   `direccion` varchar(45) NOT NULL,
   `latitud` float NOT NULL,
   `longitud` float NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Volcado de datos para la tabla `escenario`
+--
+
+INSERT INTO `escenario` (`id`, `nombre`, `deporte`, `descripcion`, `disponibilidad`, `barrio`, `direccion`, `latitud`, `longitud`) VALUES
+(1, 'coliseo mayor', 1, 'escenario deportivo', '1', 'villapilar', 'cra 34 #20-20', 12341300, 98768800),
+(2, 'coliseo menor', 1, 'escenario deportivo', '1', 'san jorge', 'cra 23 #20-20', 12234300, 98768800),
+(3, 'futbol5', 3, 'escenario deportivo', '2', 'colinas', 'cll 55 #22-10', 12341300, 98768800),
+(4, 'Multicancha san juan', 2, 'escenario deportivo', '3', 'la leonora', 'cra 78 #45-20', 1841320, 98768800);
 
 -- --------------------------------------------------------
 
@@ -151,6 +181,15 @@ CREATE TABLE `horario` (
   `hora_fin` time NOT NULL,
   `escenario_id` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Volcado de datos para la tabla `horario`
+--
+
+INSERT INTO `horario` (`id`, `dia`, `jornada`, `hora_inicio`, `hora_fin`, `escenario_id`) VALUES
+(1, 'lunes', 'manana', '09:00:00', '11:00:00', 1),
+(2, 'miercoles', 'manana', '06:00:00', '12:00:00', 2),
+(3, 'viernes', 'tarde', '13:00:00', '18:00:00', 3);
 
 -- --------------------------------------------------------
 
@@ -244,19 +283,19 @@ ALTER TABLE `reserva`
 -- AUTO_INCREMENT de la tabla `deportes`
 --
 ALTER TABLE `deportes`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT de la tabla `escenario`
 --
 ALTER TABLE `escenario`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT de la tabla `horario`
 --
 ALTER TABLE `horario`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- Restricciones para tablas volcadas
