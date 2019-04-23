@@ -19,15 +19,21 @@ class Deportista extends CI_Controller {
 
         public function index()
         {
-            $data["deportistas_data"] = $this->mdeportista->lista();
-            $this->carga_layout("lista_deportistas",$data);
+            // $data["deportistas_data"] = $this->mdeportista->lista();
+            // $this->carga_layout("lista_deportistas",$data);
+            $this->carga_layout("lista_deportistas");
         }
 
-        public function carga_layout($template, $data = '') 
+        public function dep_data() {
+            $datos = $this->mdeportista->lista();
+            echo json_encode($datos);
+        }
+
+        public function carga_layout($template) 
         {
             $this->load->view('header');
             $this->load->view('nav');
-            $this->load->view($template, $data);
+            $this->load->view($template);
         }
 
         public function crearDeportista() {
@@ -46,7 +52,7 @@ class Deportista extends CI_Controller {
             echo json_encode($q->row());
         }
 
-        public function update($id)
+        public function update($cedula)
         {
             $this->load->database();
 
@@ -56,7 +62,12 @@ class Deportista extends CI_Controller {
             $q = $this->db->get_where('deportista', array('cedula' => $cedula));
 
 
-            echo json_encode($insert);
+            echo json_encode($q->row());
+        }
+
+        function delete() {
+            $data=$this->mdeportista->borrar_user();
+            echo json_encode($data);
         }
 
 }

@@ -35,4 +35,11 @@ public function lista() {
     return $query->result();
 }
 
+public function borrar_user() {
+    $id = $this->input->post('cedula');
+    $this->db->where('cedula', $id);
+    $result=$this->db->delete('deportista');
+    return $result;
+}
+
 }

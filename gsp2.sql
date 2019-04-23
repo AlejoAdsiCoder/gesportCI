@@ -1,13 +1,15 @@
 -- phpMyAdmin SQL Dump
--- version 4.6.6deb5
+-- version 4.8.0
 -- https://www.phpmyadmin.net/
 --
--- Servidor: localhost:3306
--- Tiempo de generación: 24-03-2019 a las 20:50:29
--- Versión del servidor: 10.1.29-MariaDB-6ubuntu2
--- Versión de PHP: 7.3.3-1+ubuntu18.10.1+deb.sury.org+1
+-- Servidor: 127.0.0.1
+-- Tiempo de generación: 06-04-2019 a las 03:14:26
+-- Versión del servidor: 10.1.31-MariaDB
+-- Versión de PHP: 5.6.35
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
+SET AUTOCOMMIT = 0;
+START TRANSACTION;
 SET time_zone = "+00:00";
 
 
@@ -80,6 +82,14 @@ CREATE TABLE `deportista` (
   `password` varchar(60) NOT NULL,
   `fecha_registro` date NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Volcado de datos para la tabla `deportista`
+--
+
+INSERT INTO `deportista` (`cedula`, `tipo_documento`, `nombre`, `apellidos`, `telefono`, `celular`, `email`, `fecha_nacimiento`, `barrio`, `direccion`, `estatura`, `peso`, `deporte`, `password`, `fecha_registro`) VALUES
+(23498759, 0, 'Juan esteban', 'Marin', 331452453, 342340912, 'jmc@gmail.com', '2019-04-20', 'otun', 'cra 45 3234', '168', 50, 3, '12345', '0000-00-00'),
+(1053830338, 0, 'Alejandro', 'P Cardona', 345663246, 23452345, 'apatino@seedem.co', '1993-10-15', 'san jorge', 'cl 46a #20-55', '170', 50, 1, '413j0', '0000-00-00');
 
 -- --------------------------------------------------------
 
@@ -274,16 +284,19 @@ ALTER TABLE `reserva`
 --
 ALTER TABLE `deportes`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+
 --
 -- AUTO_INCREMENT de la tabla `escenario`
 --
 ALTER TABLE `escenario`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+
 --
 -- AUTO_INCREMENT de la tabla `horario`
 --
 ALTER TABLE `horario`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+
 --
 -- Restricciones para tablas volcadas
 --
@@ -333,6 +346,7 @@ ALTER TABLE `horario`
 ALTER TABLE `reserva`
   ADD CONSTRAINT `fk_reserva_club1` FOREIGN KEY (`club_id`) REFERENCES `club` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
   ADD CONSTRAINT `fk_reserva_escenario1` FOREIGN KEY (`escenario_id`) REFERENCES `escenario` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION;
+COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
