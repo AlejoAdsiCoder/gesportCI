@@ -51,5 +51,6 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 */
 $route['default_controller'] = 'Sitio';
 $route['deportistas/lista'] = 'Deportista';
+$route['entrenadores/lista'] = 'Entrenador';
 $route['404_override'] = '';
 $route['translate_uri_dashes'] = FALSE;
