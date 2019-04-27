@@ -9,20 +9,19 @@
     <table class="table table-sm">
             <thead>
               <tr>
-                <th scope="col">#</th>
+                <th scope="col"># Cédula</th>
                 <th scope="col">Tipo documento</th>
                 <th scope="col">Nombre</th>
                 <th scope="col">Apellidos</th>
+                <th scope="col">Email</th>
                 <th scope="col">Telefono</th>
                 <th scope="col">Celular</th>
-                <th scope="col">Email</th>
                 <th scope="col">Fecha Nacimiento</th>
                 <th scope="col">Barrio</th>
                 <th scope="col">Dirección</th>
-                <th scope="col">Estatura</th>
-                <th scope="col">Peso</th>
                 <th scope="col">Deporte</th>
                 <th scope="col">Password</th>
+                <th scope="col">Fecha_registro</th>
               </tr>
             </thead>
             <tbody id="show_data">
@@ -142,7 +141,7 @@
 $(document).ready(function() {
     /* Datos Editar */
 
-    show_deport();
+    show_ents();
 
     $("body").on("click",".edit-dep",function() {
     var url = '<?php echo base_url() ?>Deportista/edit';
@@ -187,20 +186,18 @@ $(document).ready(function() {
 
         e.preventDefault();
 
-        var tipo_documento = $('#tp').val();
         var cedula = $('#id').val();
+        var tipo_documento = $('#tp').val();
         var nombre = $('#nom').val();
         var apellidos = $('#ape').val();
+        var email = $('#email').val();
         var telefono = $('#tel').val();
         var celular = $('#cel').val();
-        var email = $('#email').val();
-        var password = $('#pass').val();
-        var deporte = $('#deporte').val();
         var fecha_nacimiento = $('#date').val();
         var barrio = $('#barrio').val();
         var direccion = $('#dir').val();
-        var estatura =$('#est').val();
-        var peso = $('#peso').val();
+        var deporte = $('#deporte').val();
+        var password = $('#pass').val();
 
         $.ajax({
             dataType: 'json',
@@ -208,20 +205,20 @@ $(document).ready(function() {
             url: '<?php echo base_url() ?>Deportista/update/' + cedula,
             data:{tipo_documento:tipo_documento,cedula:cedula, nombre:nombre, apellidos:apellidos, telefono:telefono,
                   celular:celular, email:email, password:password, deporte:deporte, fecha_nacimiento:fecha_nacimiento,
-                  barrio:barrio, direccion:direccion, estatura:estatura, peso:peso},
+                  barrio:barrio, direccion:direccion, password:password},
             }).done(function(data){
 
             $("#edit-dep").modal('hide');
-            show_deport();
+            show_ents();
             
             });
 
     });
 
-function show_deport() {
+function show_ents() {
             $.ajax({
                 type  : 'ajax',
-                url   : '<?php echo base_url() ?>Deportista/dep_data',
+                url   : '<?php echo base_url() ?>Entrenador/ent_data',
                 async : true,
                 dataType : 'json',
                 success : function(data){
@@ -234,18 +231,16 @@ function show_deport() {
                         '<td>'+data[i].tipo_documento+'</td>'+
                         '<td>'+data[i].nombre+'</td>'+
                         '<td>'+data[i].apellidos+'</td>'+
-                        '<td>'+data[i].telefono+'</td>'+
-                        '<td>'+data[i].celular+'</td>'+
                         '<td>'+data[i].email+'</td>'+
+                        '<td>'+data[i].telefono+'</td>'+
+                        '<td>'+data[i].celular+'</td>'+ 
                         '<td>'+data[i].fecha_nacimiento+'</td>'+
                         '<td>'+data[i].barrio+'</td>'+
                         '<td>'+data[i].direccion+'</td>'+
-                        '<td>'+data[i].estatura+'</td>'+
-                        '<td>'+data[i].peso+'</td>'+
                         '<td>'+data[i].deporte+'</td>'+
                         '<td>'+data[i].password+'</td>'+
-                        '<td>'+'<button data-toggle="modal" data-target="#edit-dep" class="btn btn-primary edit-dep" value="'+data[i].cedula+'"><i class="far fa-edit"></i></button></td>'+
-                        '<td>'+'<button data-toggle="modal" data-target="#del-dep" class="btn btn-primary del-dep" value="'+data[i].cedula+'"><i class="far fa-delete"></i></button></td>'+
+                        
+                        '<td>'+'<button data-toggle="modal" data-target="#edit-dep" class="btn btn-primary edit-dep" value="'+data[i].cedula+'"><i class="far fa-edit"></i></button><button data-toggle="modal" data-target="#del-dep" class="btn btn-danger del-dep" value="'+data[i].cedula+'"><i class="fas fa-user-minus"></i></button>'+
                         '</tr>';
                     }
                     $('#show_data').html(html);
