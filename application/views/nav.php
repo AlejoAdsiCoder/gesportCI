@@ -34,11 +34,11 @@
         <a class="dropdown-item" href="<?php echo base_url();?>Deportista/crearDeportista">Nuevo</a>
       </div>
       <li class="nav-item dropdown">
-        <a class="nav-link dropdown-toggle" href="gsport.test/listaEntrenadores.blade.php" id="entrenadores" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Entrenadores</a>
+        <a class="nav-link dropdown-toggle" href="<?php echo base_url();?>/lista_entrenador.php" id="entrenadores" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Entrenadores</a>
       
       <div class="dropdown-menu" aria-labelledby="entrenadores">
-        <a class="dropdown-item" href="gsport.test/listaEntrenadores.blade.php">Administrar</a>
-        <a class="dropdown-item" href="#">Añadir</a>
+        <a class="dropdown-item" href="<?php echo base_url();?>entrenadores/lista">Administrar</a>
+        <a class="dropdown-item" href="<?php echo base_url();?>Entrenador/crearEntrenador">Añadir</a>
       </div>
     </ul>
     <form class="form-inline my-2 my-md-0">
