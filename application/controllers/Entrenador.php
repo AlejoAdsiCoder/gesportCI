@@ -39,10 +39,19 @@ class Entrenador extends CI_Controller {
 
     public function crearEntrenador() {
         $this->carga_layout("crear_entrenador");
-    }
+     }
 
+     /*
     public function nuevoEntrenador() {
-        $this->mentrenador->add_entrenador();
+        $data = $this->mentrenador->add_entrenador();
+        echo json_encode($data);
+    } */
+
+    public function edit($cedula)
+    {
+        $this->load->database();
+        $q = $this->db->get_where('entrenador', array('cedula' => $cedula));
+        echo json_encode($q->row());
     }
 
     public function update($cedula)
@@ -56,5 +65,19 @@ class Entrenador extends CI_Controller {
 
 
         echo json_encode($q->row());
+    }
+
+    public function nuevoEntrenador() {
+        $this->load->database();
+
+        $insert = $this->input->post();
+        $result = $this->db->insert('deportista', $insert);
+        
+        echo json_encode($result);
+    }
+
+    function delete() {
+        $data=$this->mentrenador->borrar_user();
+        echo json_encode($data);
     }
 }

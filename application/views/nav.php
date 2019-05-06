@@ -14,7 +14,7 @@
       
       <div class="dropdown-menu" aria-labelledby="clubes">
         <a class="dropdown-item" href="#">Administrar</a>
-        <a class="dropdown-item" href="#">Registrar Clubes</a>
+        <a class="dropdown-item" href="<?php echo base_url();?>Club/Crear">Registrar Clubes</a>
         <a class="dropdown-item" href="#">Añadir Deportistas</a>
       </div>
       </li>
@@ -38,8 +38,8 @@
         <a class="nav-link dropdown-toggle" href="<?php echo base_url();?>/lista_entrenador.php" id="entrenadores" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Entrenadores</a>
       
       <div class="dropdown-menu" aria-labelledby="entrenadores">
-        <a class="dropdown-item" href="#">Administrar</a>
-        <a class="dropdown-item" href="<?php echo base_url();?>entrenadores/lista">Añadir</a>
+        <a class="dropdown-item" href="<?php echo base_url();?>entrenadores/lista">Administrar</a>
+        <a class="dropdown-item" href="<?php echo base_url();?>Entrenador/crearEntrenador">Añadir</a>
       </div>
       </li>
     </ul>

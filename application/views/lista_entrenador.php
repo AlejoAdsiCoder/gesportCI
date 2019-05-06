@@ -1,10 +1,11 @@
 <div class="container-fluid">
 <div class="card">
   <div class="card-header">
-  <i class="fas fa-user"></i>Lista de Deportistas
-  <button type="button" class="btn btn-success btn-lg">Nuevo Deportista</button>
+  <i class="fas fa-user"></i>Lista de Entrenadores
+  <button type="button" data-toggle="modal" data-target="#create-ent" class="btn btn-success btn-lg">Nuevo Entrenador </button>
   </div>
   <div class="card-body">
+    <!-- Lista de entrenadores -->
     <div class="side col-md-8">
     <table class="table table-sm">
             <thead>
@@ -29,7 +30,8 @@
             </tbody>
           </table>
     </div>
-    <div class="modal fade" id="edit-dep" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <!--- Modal ACTUALIZAR --->
+    <div class="modal fade" id="edit-ent" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog" role="document">
         <div class="modal-content">
         <div class="modal-header">
@@ -109,7 +111,8 @@
             </div>
           </div>
       </div>
-      <div class="modal fade" id="del-dep" tabindex="-1" role="dialog" aria-labelledby="" aria-hidden="true">
+      <!--- Modal ElIMINAR --->
+      <div class="modal fade" id="del-ent" tabindex="-1" role="dialog" aria-labelledby="" aria-hidden="true">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header">
@@ -122,13 +125,93 @@
                   <strong>Esta seguro de que desea borrar este usuario?</strong>
                 </div>
                 <div class="modal-footer">
-                <input type="hidden" name="deportista_delete" id="deportista_delete" class="form-control">
+                <input type="hidden" name="entrenador_delete" id="entrenador_delete" class="form-control">
                 <button type="button" class="btn btn-secondary" data-dismiss="modal">No</button>
                 <button type="button" type="submit" id="delete" class="btn btn-primary">Yes</button>
                 </div>
             </div>
         </div>
         </div>
+        <!--- Modal CREAR --->
+        <div class="modal fade" id="create-ent" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+        <div class="modal-content">
+        <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLabel">Crear Deportista</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+            <div class="modal-body">
+            <form action="<?php echo base_url(); ?>Entrenador/nuevoEntrenador" method="post">
+            <div class="form-group">
+                <label for="">Tipo documento</label>
+                <select class="form-control" id="tpdoc" name="tipodoc">
+                    <option value="cc">Cédula de ciudadania</option>
+                    <option value="ti">Tarjeta de identidad</option>
+                    <option value="ce">Cédula de extranjeria</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="">Número identificación</label>
+                <input type="text" id="cedula" value="" class="form-control" name="cedula">
+            </div>
+            <div class="form-row">
+                <div class="form-group col">
+                    <label for="">Nombre</label>
+                    <input type="text" id="nombres" name="nombres" value="" class="form-control">
+                </div>
+                <div class="form-group col">
+                    <label for="">Apellidos</label>
+                    <input type="text" id="apellidos" name="apellidos" value="" class="form-control">
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="">Correo Electrónico</label>
+                <input type="text" id="correo" name="correo" value="" class="form-control">
+            </div>
+            <div class="form-group">
+                <label for="">Teléfono</label>
+                <input type="text" id="telefono" name="telefono" value="" class="form-control">
+            </div>
+            <div class="form-group">
+                <label for="">Celular</label>
+                <input type="text" id="celular" name="celular" value="" class="form-control">
+            </div>
+            <div class="form-group">
+                <label for="">Fecha nacimiento</label>
+                <input type="date" id="datenac" class="form-control" value="" name="datenac">
+            </div>
+            <div class="form-group">
+                <label for="">Barrio</label>
+                <input type="text" id="bar" class="form-control" value="" name="bar">
+            </div> 
+            <div class="form-group">
+                <label for="">Dirección</label>
+                <input type="text" id="direc" class="form-control" value="" name="direc">
+            </div> 
+            <div class="form-group">
+                <label for="">Deporte</label>
+                <select name="deporte" id="sport" name="sport" class="form-control">
+                    <option value="1">Baloncesto</option>
+                    <option value="2">Futbol</option>
+                    <option value="3">Natación</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="">Contraseña</label>
+                <input type="password" id="password" name="password" value="" class="form-control">
+            </div>
+            
+                  </div>
+                <div class="modal-footer">
+                  <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+                  <button type="submit" class="btn btn-primary create">Crear</button>
+              </div>
+              </form>
+            </div>
+          </div>
+      </div>
   </div>
 </div>
 </div>
@@ -143,8 +226,8 @@ $(document).ready(function() {
 
     show_ents();
 
-    $("body").on("click",".edit-dep",function() {
-    var url = '<?php echo base_url() ?>Deportista/edit';
+    $("body").on("click",".edit-ent",function() {
+    var url = '<?php echo base_url() ?>Entrenador/edit';
     
     var dep_id = $(this).val();
     alert(url + '/' + dep_id);
@@ -167,8 +250,6 @@ $(document).ready(function() {
                 $('#date').val(datos.fecha_nacimiento);
                 $('#barrio').val(datos.barrio);
                 $('#dir').val(datos.direccion);
-                $('#est').val(datos.estatura);
-                $('#peso').val(datos.peso);
                 }
             else
                 alert("Nanay");
@@ -202,17 +283,50 @@ $(document).ready(function() {
         $.ajax({
             dataType: 'json',
             type:'POST',
-            url: '<?php echo base_url() ?>Deportista/update/' + cedula,
+            url: '<?php echo base_url() ?>Entrenador/update/' + cedula,
             data:{tipo_documento:tipo_documento,cedula:cedula, nombre:nombre, apellidos:apellidos, telefono:telefono,
                   celular:celular, email:email, password:password, deporte:deporte, fecha_nacimiento:fecha_nacimiento,
-                  barrio:barrio, direccion:direccion, password:password},
+                  barrio:barrio, direccion:direccion},
             }).done(function(data){
 
-            $("#edit-dep").modal('hide');
+            $("#edit-ent").modal('hide');
             show_ents();
             
             });
 
+    });
+
+    // Crear entrenador
+    $(".create").click(function(e) {
+        e.preventDefault();
+
+        var cedula = $('#cedula').val();
+        var tipo_documento = $('#tpdoc').val();
+        var nombre = $('#nombres').val();
+        var apellidos = $('#apellidos').val();
+        var email = $('#correo').val();
+        var telefono = $('#telefono').val();
+        var celular = $('#celular').val();
+        var fecha_nacimiento = $('#datenac').val();
+        var barrio = $('#bar').val();
+        var direccion = $('#direccion').val();
+        var deporte = $('#sport').val();
+        var password = $('#password').val();
+
+        $.ajax({
+            dataType: 'json',
+            type:'POST',
+            url: '<?php echo base_url() ?>Entrenador/nuevoEntrenador',
+            data:{cedula:cedula, tipo_documento:tipo_documento, nombre:nombre, apellidos:apellidos, telefono:telefono,
+                  celular:celular, email:email, password:password, deporte:deporte, fecha_nacimiento:fecha_nacimiento,
+                  barrio:barrio, direccion:direccion},
+            }).done(function(data){
+            
+            $("#create-ent").modal('hide');
+            show_ents();
+            
+            });
+        
     });
 
 function show_ents() {
@@ -240,7 +354,7 @@ function show_ents() {
                         '<td>'+data[i].deporte+'</td>'+
                         '<td>'+data[i].password+'</td>'+
                         
-                        '<td>'+'<button data-toggle="modal" data-target="#edit-dep" class="btn btn-primary edit-dep" value="'+data[i].cedula+'"><i class="far fa-edit"></i></button><button data-toggle="modal" data-target="#del-dep" class="btn btn-danger del-dep" value="'+data[i].cedula+'"><i class="fas fa-user-minus"></i></button>'+
+                        '<td>'+'<button data-toggle="modal" data-target="#edit-ent" class="btn btn-primary edit-ent" value="'+data[i].cedula+'"><i class="far fa-edit"></i></button><button data-toggle="modal" data-target="#del-ent" class="btn btn-danger del-ent" value="'+data[i].cedula+'"><i class="fas fa-user-minus"></i></button>'+
                         '</tr>';
                     }
                     $('#show_data').html(html);
@@ -250,24 +364,24 @@ function show_ents() {
 }
 
 //get data for delete record
-$("body").on("click",".del-dep",function() {
+$("body").on("click",".del-ent",function() {
     var code = $(this).val();
-    $('[name="deportista_delete"]').val(code);
+    $('[name="entrenador_delete"]').val(code);
 });
 
 //delete record to database
 $('#delete').on('click',function(){
-    var code = $('#deportista_delete').val();
+    var code = $('#entrenador_delete').val();
     $.ajax({
         type : "POST",
-        url  : "<?php echo base_url() ?>Deportista/delete",
+        url  : "<?php echo base_url() ?>Entrenador/delete",
         dataType : "JSON",
         data : {cedula:code},
         success: function(data) {
             alert(data);
-            $('[name="deportista_delete"]').val("");
-            $('#del-dep').modal('hide');
-            show_deport();
+            $('[name="entrenador_delete"]').val("");
+            $('#del-ent').modal('hide');
+            show_ents();
         }
     });
     return false;
