@@ -2,7 +2,16 @@
 
 class Club extends CI_controller {
     function __construct() {
-        parent::__construct();
+        parent::__construct();            
+        $this->load->helper(array('form', 'url'));        
+        // Libreria para iniciar sesión
+        // $this->load->library('session');
+        //Carga la libreria
+        // $this->load->library("excel");
+        //$this->load->library('html2pdf');
+
+        //Carga del Modelo
+        $this->load->model('mclub');                                                              
     }
     public function index()
     {
@@ -22,22 +31,38 @@ class Club extends CI_controller {
         $this->carga_layout("crear_club.php");
     }
 
-    public function addClub() {
+    public function nuevo() {
         $this->load->database();
-        $data = array(
-            'nombre' => $this->input->post('nombre'),
-            'deporte_entrenamiento'  => $this->input->post('deporte'),
-            'fecha_registro'=> $this->input->post('fecha_registro'),
-            'cupo' => $this->input->post('cupo'),
-            'estado' => $this->input->post('estado'),
-            'entrenador_cedula' => $this->input->post('entrenador')
-        );
-        $this->db->insert('club', $data);
+
+        $insert = $this->input->post();
+        $result = $this->db->insert('club', $insert);
+        
+        echo json_encode($result);
     }
 
-    public function lista() {
+    public function edit($id)
+    {
         $this->load->database();
-        $query = $this->db->get("club");
-        echo json_encode($query->result());
+        $q = $this->db->get_where('club', array('id' => $id));
+        echo json_encode($q->row());
+    }
+
+    public function update($id)
+    {
+        $this->load->database();
+
+        $insert = $this->input->post();
+        $this->db->where('id', $id);
+        $this->db->update('club', $insert);
+        $q = $this->db->get_where('club', array('id' => $id));
+
+
+        echo json_encode($q->row());
+    }
+    
+
+    public function lista() {
+        $data = $this->mclub->lista();
+        echo json_encode($data);
     }
 }

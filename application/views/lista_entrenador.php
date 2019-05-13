@@ -317,6 +317,7 @@ $(document).ready(function() {
             dataType: 'json',
             type:'POST',
             url: '<?php echo base_url() ?>Entrenador/nuevoEntrenador',
+            dataType: "JSON",
             data:{cedula:cedula, tipo_documento:tipo_documento, nombre:nombre, apellidos:apellidos, telefono:telefono,
                   celular:celular, email:email, password:password, deporte:deporte, fecha_nacimiento:fecha_nacimiento,
                   barrio:barrio, direccion:direccion},

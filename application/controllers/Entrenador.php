@@ -71,7 +71,7 @@ class Entrenador extends CI_Controller {
         $this->load->database();
 
         $insert = $this->input->post();
-        $result = $this->db->insert('deportista', $insert);
+        $result = $this->db->insert('entrenador', $insert);
         
         echo json_encode($result);
     }
