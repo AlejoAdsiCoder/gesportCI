@@ -6,7 +6,7 @@ function __construct()
 {  
     parent::__construct();  
     $this->load->helper('url');//you can autoload this functions by configuring autoload.php in config directory  
-    $this->load->library ( 'session' );  
+    $this->load->library('session');  
     $this->load->model('mlogin');  
 }  
 public function index(){  
@@ -14,15 +14,16 @@ public function index(){
 }  
 public function check_login(){  
      
-    $data['cedula']=htmlspecialchars($_POST['name']);  
-    $data['password']=htmlspecialchars($_POST['pwd']);  
-    $res=$this->data_model->islogin($data);  
-    if($res){     
-        $this->session->set_userdata('id',$data['username']);   
-      echo base_url()."Deportista";  
+    $data['cedula']=htmlspecialchars($_POST['cedula']);  
+    $data['password']=htmlspecialchars($_POST['password']);  
+    $res=$this->mlogin->islogin($data);  
+    if($res==1){     
+        //header('location:'.base_url()."Deportista");
+        //$this->session->set_userdata('id',$data['username']);   
+        echo base_url()."Entrenador";  
     }  
     else{  
-       echo 0;  
+        echo base_url()."Deportista";  
     }   
 }  
 public function logout(){  

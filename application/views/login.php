@@ -40,7 +40,7 @@
         $.ajax({  
         type: "POST",  
         url:  "<?php echo base_url(); ?>Login/check_login",  
-        data: {name: user_name, pwd: password},  
+        data: {cedula: cedula, password: password},  
         cache: false,  
         success: function(result){  
             if(result!=0){  

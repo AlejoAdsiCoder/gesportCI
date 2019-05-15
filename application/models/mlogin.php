@@ -7,7 +7,14 @@ function __construct()
     }  
   
     public function islogin($data){  
-        $query=$this->db->get_where('deportista',array('cedula'=>$data['username'],'password'=>$data['password']));  
-        return $query->num_rows();  
+        $query=$this->db->get_where('deportista',array('cedula'=>$data['cedula'],'password'=>$data['password']));  
+        
+        if($query->num_rows() == 0) {
+            $query2 = $this->db->get_where('entrenador',array('cedula'=>$data['cedula'],'password'=>$data['password']));
+            return 1;
+        }  
+        else {
+            return 2;
+        }
     }
 }  
