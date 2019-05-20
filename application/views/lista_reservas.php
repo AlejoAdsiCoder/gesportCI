@@ -49,11 +49,14 @@
 						eventLimit: true, // allow "more" link when too many events
 						events: $.parseJSON(data),
 						eventClick: function(event) {
+							horaini = $.fullCalendar.moment(event.start).format('dddd, MMMM Do YYYY, h:mm');
+							horafin = $.fullCalendar.moment(event.end).format("dddd, MMMM Do YYYY, h:mm");
+							
 							$('#mdTitle').html(event.title);
 							$('#mdclub').html(event.club);
 							$('#mdesc').html(event.escenario);
-							$('#mdfinicio').html(event.start);
-							$('#mdfin').html(event.end);
+							$('#mdfinicio').html(horaini);
+							$('#mdfin').html(horafin);
 							$('#detalleModal').modal('show');
 						}
 						/*
