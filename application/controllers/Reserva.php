@@ -11,7 +11,7 @@ class Reserva extends CI_Controller {
         //$this->load->library('html2pdf');
 
         //Carga del Modelo
-        $this->load->model('mdeportista');
+        $this->load->model('mreserva');
         
         
         //$this->load->model("excel_export_model");
@@ -25,13 +25,13 @@ class Reserva extends CI_Controller {
 
     public function carga_layout($template) 
     {
+        $this->load->view('header');
         $this->load->view('nav');
         $this->load->view($template);
     }
 
-    public function getReservas() {
-        $this->load->database();
-        $query = $this->db->get('reserva');
-        echo json_encode($query->result());
+    public function getReserva() {
+        $query = $this->mreserva->getReservas();
+        echo json_encode($query);
     }
 }

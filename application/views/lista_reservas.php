@@ -1,31 +1,63 @@
-<!DOCTYPE html>
-<html>
-<head>
-<meta charset='utf-8' />
-<link href='<?php echo base_url(); ?>assets/fullcalendar/fullcalendar.min.css' rel='stylesheet' />
-<link href='<?php echo base_url(); ?>assets/fullcalendar/fullcalendar.print.min.css' rel='stylesheet' media='print' />
-<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
-<script src='<?php echo base_url(); ?>assets/fullcalendar/lib/moment.min.js'></script>
-<script src='<?php echo base_url(); ?>assets/fullcalendar/lib/jquery.min.js'></script>
-<script src='<?php echo base_url(); ?>assets/fullcalendar/fullcalendar.min.js'></script>
+<div class="container">
+<div id='calendar'></div>
+</div>
+
+<div id="detalleModal" class="modal fade">
+<div class="modal-dialog">
+ <div class="modal-content">
+ <div class="modal-header">
+ <button type="button" class="close" data-dismiss="modal">×</button>
+ <h4 class="modal-title">Event Details</h4>
+ </div>
+ <div id="modalBody" class="modal-body">
+ <h4 id="mdTitle" class="modal-title"></h4>
+ <p id="mdclub"></p>
+ <p id="mdesc"></p>
+ <p id="mdfinicio"></p>
+ <p id="mdfin"></p>
+ </div>
+ <input type="hidden" id="eventID"/>
+ <div class="modal-footer">
+
+ 	<button class="btn btn-warning" id="confirmarTodos" data-dismiss="modal" aria-hidden="true">Confirmar Todos </button>
+  <button class="btn btn-success" id="confirmar" data-dismiss="modal" aria-hidden="true">Confirmar</button>
+
+ <button class="btn" data-dismiss="modal" aria-hidden="true">Cancel</button>
+ <button type="submit" class="btn btn-danger" id="deleteButton">Delete</button>
+ </div>
+ </div>
+</div>
+</div>
+
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
 <script>
 
 	$(document).ready(function() {
 
-		$.post('<?php echo base_url(); ?>Reserva/getReservas',
+		$.post('<?php echo base_url(); ?>Reserva/getReserva',
 			function(data) {
+				alert(data);
 			$('#calendar').fullCalendar({
 						header: {
 							left: 'prev,next today',
 							center: 'title',
 							right: 'month,basicWeek,basicDay'
 						},
-						defaultDate: '2016-12-12',
+						defaultDate: new Date(),
 						navLinks: true, // can click day/week names to navigate views
 						editable: true,
 						eventLimit: true, // allow "more" link when too many events
+						events: $.parseJSON(data),
+						eventClick: function(event) {
+							$('#mdTitle').html(event.title);
+							$('#mdclub').html(event.club);
+							$('#mdesc').html(event.escenario);
+							$('#mdfinicio').html(event.start);
+							$('#mdfin').html(event.end);
+							$('#detalleModal').modal('show');
+						}
 						/*
-						events: [
+						 [
 							{
 								title: 'All Day Event',
 								start: '2016-12-01'
@@ -90,25 +122,5 @@
 	});
 
 </script>
-<style>
-
-	body {
-		margin: 40px 10px;
-		padding: 0;
-		font-family: "Lucida Grande",Helvetica,Arial,Verdana,sans-serif;
-		font-size: 14px;
-	}
-
-	#calendar {
-		max-width: 900px;
-		margin: 0 auto;
-	}
-
-</style>
-</head>
-<body>
-
-	<div id='calendar'></div>
 
 </body>
-</html>
