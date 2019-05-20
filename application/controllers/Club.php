@@ -32,12 +32,15 @@ class Club extends CI_controller {
     }
 
     public function nuevo() {
+        /*
         $this->load->database();
 
         $insert = $this->input->post();
         $result = $this->db->insert('club', $insert);
+        */
         
-        echo json_encode($result);
+        $insert = $this->mclub->add();
+        echo json_encode($insert);
     }
 
     public function edit($id)
@@ -58,6 +61,11 @@ class Club extends CI_controller {
 
 
         echo json_encode($q->row());
+    }
+
+    function delete() {
+        $data=$this->mclub->borrar_club();
+        echo json_encode($data);
     }
     
 

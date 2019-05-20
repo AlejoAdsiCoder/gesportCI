@@ -70,7 +70,8 @@
             </form>
           </div>
       </div>
-      <div class="modal fade" id="del-dep" tabindex="-1" role="dialog" aria-labelledby="" aria-hidden="true">
+  </div>
+  <div class="modal fade" id="del-club" tabindex="-1" role="dialog" aria-labelledby="" aria-hidden="true">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header">
@@ -83,14 +84,13 @@
                   <strong>Esta seguro de que desea borrar este club?</strong>
                 </div>
                 <div class="modal-footer">
-                <input type="hidden" name="deportista_delete" id="deportista_delete" class="form-control">
+                <input type="hidden" name="club_delete" id="club_delete" class="form-control">
                 <button type="button" class="btn btn-secondary" data-dismiss="modal">No</button>
                 <button type="button" type="submit" id="delete" class="btn btn-primary">Yes</button>
                 </div>
             </div>
         </div>
         </div>
-  </div>
   <!--- Modal CREAR --->
   <div class="modal fade" id="create-club" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog" role="document">
@@ -230,9 +230,8 @@ $(document).ready(function() {
             data:{nombre:nombre, deporte:deporte, fecha:fecha, cupo:cupo, estado:estado, entrenador:entrenador},
             
             }).done(function(data){
-            alert(data);
             $("#create-club").modal('hide');
-            show_ents();
+            show_club();
             
             });
         
@@ -269,24 +268,24 @@ function show_club() {
 }
 
 //get data for delete record
-$("body").on("click",".del-dep",function() {
+$("body").on("click",".del-club",function() {
     var code = $(this).val();
-    $('[name="deportista_delete"]').val(code);
+    $('[name="club_delete"]').val(code);
 });
 
 //delete record to database
 $('#delete').on('click',function(){
-    var code = $('#deportista_delete').val();
+    var id = $('#club_delete').val();
+   
     $.ajax({
         type : "POST",
-        url  : "<?php echo base_url() ?>Deportista/delete",
+        url  : "<?php echo base_url() ?>Club/delete",
         dataType : "JSON",
-        data : {cedula:code},
+        data : {id:id},
         success: function(data) {
-            alert(data);
-            $('[name="deportista_delete"]').val("");
-            $('#del-dep').modal('hide');
-            show_deport();
+            $('[name="club_delete"]').val("");
+            $('#del-club').modal('hide');
+            show_club();
         }
     });
     return false;
