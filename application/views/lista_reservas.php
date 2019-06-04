@@ -36,7 +36,6 @@
 
 		$.post('<?php echo base_url(); ?>Reserva/getReserva',
 			function(data) {
-				alert(data);
 			$('#calendar').fullCalendar({
 						header: {
 							left: 'prev,next today',
@@ -49,6 +48,19 @@
 						eventLimit: true, // allow "more" link when too many events
 						events: $.parseJSON(data),
 						eventClick: function(event) {
+							/*
+							horaini = $.fullCalendar.formatDate(event.start, {
+								month: 'long',
+    							year: 'numeric',
+								day: 'numeric'
+							});
+							horafin = $.fullCalendar.formatDate(event.end, {
+								month: 'long',
+    							year: 'numeric',
+								day: 'numeric'
+							});
+							*/
+							$.fullCalendar.moment().locale('es');
 							horaini = $.fullCalendar.moment(event.start).format('dddd, MMMM Do YYYY, h:mm');
 							horafin = $.fullCalendar.moment(event.end).format("dddd, MMMM Do YYYY, h:mm");
 							

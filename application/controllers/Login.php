@@ -17,14 +17,22 @@ public function check_login(){
     $data['cedula']=htmlspecialchars($_POST['cedula']);  
     $data['password']=htmlspecialchars($_POST['password']);  
     $res=$this->mlogin->islogin($data);  
-    if($res==1){     
-        //header('location:'.base_url()."Deportista");
-        //$this->session->set_userdata('id',$data['username']);   
-        echo base_url()."Entrenador";  
-    }  
-    else{  
-        echo base_url()."Deportista";  
-    }   
+    switch($res) 
+    {
+        case 1:
+            echo base_url()."Admin";
+            break;
+        case 2:
+            echo base_url()."Deportista";
+            break;
+        case 3:
+            echo base_url()."Entrenador";
+            break;
+        default:
+            echo "El usuario no existe";
+            break;
+
+    }
 }  
 public function logout(){  
     $this->session->sess_destroy();  

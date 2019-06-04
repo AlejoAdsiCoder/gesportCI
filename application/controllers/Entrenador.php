@@ -11,6 +11,7 @@ class Entrenador extends CI_Controller {
         //$this->load->library('html2pdf');
 
         //Carga del Modelo
+        $this->load->library('session');  
         $this->load->model('mentrenador');
         
         
@@ -28,8 +29,10 @@ class Entrenador extends CI_Controller {
     public function carga_layout($template) 
     {
         $this->load->view('header');
-        $this->load->view('nav');
-        $this->load->view($template);
+        if(isset($_SESSION['e_id'])) {
+            $this->load->view('layouts/entrenador/nav');
+            $this->load->view($template);    
+        }   
     }   
 
     public function ent_data() {

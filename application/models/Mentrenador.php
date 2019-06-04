@@ -15,6 +15,7 @@ class Mentrenador extends CI_Model {
             'tipo_documento' => $this->input->post('tipo_documento'),
             'nombre' => $this->input->post('nombre'),
             'apellidos' => $this->input->post('apellidos'),
+            'rol' => $this->input->post('per'),
             'email' => $this->input->post('email'),
             'telefono' => $this->input->post('telefono'),
             'celular' => $this->input->post('celular'),

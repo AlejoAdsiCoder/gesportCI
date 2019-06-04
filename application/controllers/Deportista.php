@@ -5,7 +5,7 @@ class Deportista extends CI_Controller {
 
         $this->load->helper(array('form', 'url'));        
         // Libreria para iniciar sesión
-        // $this->load->library('session');
+        $this->load->library('session');
         //Carga la libreria
         // $this->load->library("excel");
         //$this->load->library('html2pdf');
@@ -32,8 +32,10 @@ class Deportista extends CI_Controller {
         public function carga_layout($template) 
         {
             $this->load->view('header');
-            $this->load->view('nav');
-            $this->load->view($template);
+            if(isset($_SESSION['d_id'])) {
+                $this->load->view('nav');
+                $this->load->view($template);
+            }
         }
 
         public function crearDeportista() {

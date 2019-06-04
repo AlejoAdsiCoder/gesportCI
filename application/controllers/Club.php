@@ -22,8 +22,11 @@ class Club extends CI_controller {
     
     public function carga_layout($template) 
     {
+        
         $this->load->view('header');
-        $this->load->view('nav');
+        if(isset($_SESSION['e_rol'])) {
+            $this->load->view('layouts/entrenador/nav');
+        }
         $this->load->view($template);
     }   
 

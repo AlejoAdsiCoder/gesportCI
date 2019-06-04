@@ -65,6 +65,7 @@
                     <input type="text" id="ape" name="apellidos" value="" class="form-control">
                 </div>
             </div>
+            <input type="hidden" id="rol" name="rol" value="" class="form-control">
             <div class="form-group">
                 <label for="">Correo Electrónico</label>
                 <input type="text" id="email" name="email" value="" class="form-control">
@@ -166,6 +167,7 @@
                     <input type="text" id="apellidos" name="apellidos" value="" class="form-control">
                 </div>
             </div>
+            <input type="hidden" id="per" name="per" value="2" class="form-control">
             <div class="form-group">
                 <label for="">Correo Electrónico</label>
                 <input type="text" id="correo" name="correo" value="" class="form-control">
@@ -271,6 +273,7 @@ $(document).ready(function() {
         var tipo_documento = $('#tp').val();
         var nombre = $('#nom').val();
         var apellidos = $('#ape').val();
+        var rol = $('#rol').val();
         var email = $('#email').val();
         var telefono = $('#tel').val();
         var celular = $('#cel').val();
@@ -284,7 +287,7 @@ $(document).ready(function() {
             dataType: 'json',
             type:'POST',
             url: '<?php echo base_url() ?>Entrenador/update/' + cedula,
-            data:{tipo_documento:tipo_documento,cedula:cedula, nombre:nombre, apellidos:apellidos, telefono:telefono,
+            data:{tipo_documento:tipo_documento,cedula:cedula, nombre:nombre, apellidos:apellidos, rol:rol, telefono:telefono,
                   celular:celular, email:email, password:password, deporte:deporte, fecha_nacimiento:fecha_nacimiento,
                   barrio:barrio, direccion:direccion},
             }).done(function(data){
@@ -304,6 +307,7 @@ $(document).ready(function() {
         var tipo_documento = $('#tpdoc').val();
         var nombre = $('#nombres').val();
         var apellidos = $('#apellidos').val();
+        var per = $('#per').val();
         var email = $('#correo').val();
         var telefono = $('#telefono').val();
         var celular = $('#celular').val();
@@ -318,7 +322,7 @@ $(document).ready(function() {
             type:'POST',
             url: '<?php echo base_url() ?>Entrenador/nuevoEntrenador',
             dataType: "JSON",
-            data:{cedula:cedula, tipo_documento:tipo_documento, nombre:nombre, apellidos:apellidos, telefono:telefono,
+            data:{cedula:cedula, tipo_documento:tipo_documento, nombre:nombre, apellidos:apellidos, rol:per, telefono:telefono,
                   celular:celular, email:email, password:password, deporte:deporte, fecha_nacimiento:fecha_nacimiento,
                   barrio:barrio, direccion:direccion},
             }).done(function(data){
