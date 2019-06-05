@@ -7,6 +7,7 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
 
     <link rel="stylesheet" href="<?php echo base_url(); ?>assets/css/style.css">
+    <link rel="stylesheet" href="<?php echo base_url(); ?>assets/css/flex.css">
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css" integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU" crossorigin="anonymous">
     <title>Document</title>
 </head>
@@ -42,6 +43,7 @@
             </div>
     </nav>
     <header>
+    
         <div class="background">
             <div class="overlay text-white">
                 <div class="row px-5 py-5">
@@ -50,6 +52,7 @@
                         <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Ex doloribus fugit hic amet laborum necessitatibus praesentium, sit vero, quidem quibusdam provident ducimus. Corporis, consectetur? Vero tempora mollitia repellendus alias quibusdam.</p>
                         <button class="btn btn-outline-primary text-white btn-lg">Leer mas</button>
                     </div>
+                    <!---
                     <div class="col-md-4 header-content-right">
                         <h3>Solicita un escenario para entrenar</h3>
                         <div class="form-group">
@@ -87,10 +90,61 @@
                         </div>
                         <button class="btn btn-outline-success btn-lg btn-block text-white">Solicitar</button>
                     </div>
+                    -->
                 </div>
             </div>
         </div>
     </header>
+    <section id="eventos">
+    <div class="container-fluid mt-5">
+    <h1 class="display-4 text-center">Consulta de Eventos</h1>
+      <div class="flex-events">
+        <div class="event">
+          <img src="img/natacion.jpg" width="120px" alt="">
+          <div class="actividad">asdfasdf</div>
+          <div class="fecha">asdfasdf</div>
+          <div class="hini">asdfasdf</div>
+          <div class="hfin">asdfasdf</div>
+        </div>
+        <div class="event">
+        <img src="img/natacion.jpg" width="120px" alt="">
+          <div class="actividad">asdfasdf</div>
+          <div class="fecha">asdfasdf</div>
+          <div class="hini">asdfasdf</div>
+          <div class="hfin">asdfasdf</div>
+        </div>
+        <div class="event">
+        <img src="img/natacion.jpg" width="120px" alt="">
+          <div class="actividad">asdfasdf</div>
+          <div class="fecha">asdfasdf</div>
+          <div class="hini">asdfasdf</div>
+          <div class="hfin">asdfasdf</div>
+        </div>
+        <div class="event">
+        <img src="<?php echo base_url(); ?>assets/img/natacion.jpg" width="120px" alt="">
+          <div class="actividad">asdfasdf</div>
+          <div class="fecha">asdfasdf</div>
+          <div class="hini">asdfasdf</div>
+          <div class="hfin">asdfasdf</div>
+        </div>
+        <div class="event">
+        <img src="img/natacion.jpg" width="120px" alt="">
+          <div class="actividad">asdfasdf</div>
+          <div class="fecha">asdfasdf</div>
+          <div class="hini">asdfasdf</div>
+          <div class="hfin">asdfasdf</div>
+        </div>
+        <div class="event">
+        <img src="img/natacion.jpg" width="120px" alt="">
+          <div class="actividad">asdfasdf</div>
+          <div class="fecha">asdfasdf</div>
+          <div class="hini">asdfasdf</div>
+          <div class="hfin">asdfasdf</div>
+        </div>
+      </div>
+    </div>
+    </section>
+    <!---
     <section id="eventos">
       <div class="container-fluid mt-5">
         <h1 class="display-4 text-center">Clubes</h1>
@@ -224,5 +278,6 @@
             </div>
         </div>
     </section>
+    --->
 </body>
 </html>
