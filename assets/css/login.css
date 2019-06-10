@@ -1,15 +1,12 @@
 body {
-  font-family: 'Nanum Gothic', sans-serif;
-  background-image: url(../img/login2.jpeg);
-  color: #fff;
+  background: url("../img/login.jpg");
   background-attachment: fixed;
 }
-#main {
-  background: #fff;
-  color: #000;
-  border: 4px solid #ccc;
-  width: 720px;
-  height: auto;
-  padding: 80px;
-
+body .header-main {
+  max-width: 310px;
+  margin: 23px auto;
+  padding: 2em;
+  background: rgba(255, 255, 255, 0.2);
 }
+
+/*# sourceMappingURL=login.css.map */
