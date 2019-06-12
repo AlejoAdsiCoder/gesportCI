@@ -1,6 +1,8 @@
 body {
-  background: url("../img/login.jpg");
-  background-attachment: fixed;
+  background: url("../img/login.jpg") no-repeat fixed;
+  background-size: cover;
+  height: 100%;
+  overflow: hidden;
 }
 body .header-main {
   max-width: 310px;
