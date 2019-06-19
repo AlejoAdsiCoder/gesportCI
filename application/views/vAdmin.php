@@ -1,4 +1,4 @@
-<div class="container">
+<div class="main">
 <div class="card">
   <div class="card-header">
     Notificaciones
@@ -13,5 +13,6 @@
     <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
     <a href="#" class="btn btn-primary">Go somewhere</a>
   </div>
+</div>
 </div>
 </div>

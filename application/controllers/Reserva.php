@@ -12,6 +12,8 @@ class Reserva extends CI_Controller {
 
         //Carga del Modelo
         $this->load->model('mreserva');
+        $this->load->model('mescenario');
+        
         
         
         //$this->load->model("excel_export_model");
@@ -28,6 +30,12 @@ class Reserva extends CI_Controller {
         // $data["deportistas_data"] = $this->mdeportista->lista();
         // $this->carga_layout("lista_deportistas",$data);
         $this->carga_layout("lista_reservas", $datases);
+    }
+
+    public function data() {
+        $this->db->order_by("razon_social", "ASC");
+        $query = $this->db->get("empresa");
+        return $query->result();
     }
 
     public function carga_layout($template, $datases) 

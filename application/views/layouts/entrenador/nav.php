@@ -35,6 +35,9 @@
         <a class="dropdown-item" href="<?php echo base_url();?>Deportista/crearDeportista">Nuevo</a>
       </div>
       </li>
+      <li class="nav-item">
+        <a class="nav-link" href="<?php echo base_url();?>Login/logout" id="esc">Salir</a>
+      </li>
     </ul>
     <form class="form-inline my-2 my-md-0">
       <input class="form-control" type="text" placeholder="Search">

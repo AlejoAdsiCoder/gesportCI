@@ -22,7 +22,10 @@
         <a class="nav-link dropdown-toggle" href="<?php echo base_url();?>Reserva" id="esc" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Reservas</a>
       </li>
       <li class="nav-item dropdown">
-        <a class="nav-link dropdown-toggle" href="<?php echo base_url();?>Escenarios" id="esc" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Escenarios Deportivos</a>
+        <a class="nav-link dropdown-toggle" href="<?php echo base_url();?>Escenario" id="esc" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Escenarios Deportivos</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="<?php echo base_url();?>Login/logout" id="esc">Salir</a>
       </li>
       <li class="nav-item dropdown"><?php echo $usu; ?></li>
     </ul>

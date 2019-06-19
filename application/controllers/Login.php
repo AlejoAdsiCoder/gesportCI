@@ -35,8 +35,10 @@ public function check_login(){
     }
 }  
 public function logout(){  
+    $this->session->set_userdata('logged_in', FALSE);
     $this->session->sess_destroy();  
-    header('location:'.base_url()."login/".$this->index());  
+    //$this->load->view('login');
+    header('location:'.base_url()."Login/".$this->index());  
       
 }  
 }  
