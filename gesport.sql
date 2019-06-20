@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 12-06-2019 a las 01:25:27
+-- Tiempo de generación: 21-06-2019 a las 01:19:10
 -- Versión del servidor: 10.1.38-MariaDB
 -- Versión de PHP: 7.3.3
 
@@ -191,21 +191,22 @@ CREATE TABLE `escenario` (
   `deporte` int(11) NOT NULL,
   `descripcion` varchar(45) NOT NULL,
   `disponibilidad` varchar(45) NOT NULL,
-  `barrio` varchar(45) NOT NULL,
   `direccion` varchar(45) NOT NULL,
-  `latitud` float NOT NULL,
-  `longitud` float NOT NULL
+  `foto` varchar(100) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
 -- Volcado de datos para la tabla `escenario`
 --
 
-INSERT INTO `escenario` (`id`, `nombre`, `deporte`, `descripcion`, `disponibilidad`, `barrio`, `direccion`, `latitud`, `longitud`) VALUES
-(1, 'coliseo mayor', 5, 'escenario deportivo', '1', 'villapilar', 'cra 34 #20-20', 12341300, 98768800),
-(2, 'coliseo menor', 6, 'escenario deportivo', '1', 'san jorge', 'cra 23 #20-20', 12234300, 98768800),
-(3, 'futbol5', 7, 'escenario deportivo', '2', 'colinas', 'cll 55 #22-10', 12341300, 98768800),
-(4, 'Multicancha san juan', 5, 'escenario deportivo', '3', 'la leonora', 'cra 78 #45-20', 1841320, 98768800);
+INSERT INTO `escenario` (`id`, `nombre`, `deporte`, `descripcion`, `disponibilidad`, `direccion`, `foto`) VALUES
+(1, 'coliseo mayor', 5, 'escenario deportivo', '1', 'cra 34 #20-20', ''),
+(2, 'coliseo menor', 6, 'escenario deportivo', '1', 'cra 23 #20-20', ''),
+(3, 'futbol5', 7, 'escenario deportivo', '2', 'cll 55 #22-10', ''),
+(4, 'Multicancha san juan', 5, 'escenario deportivo', '3', 'cra 78 #45-20', ''),
+(5, 'prueba', 5, 'asdfasdf', '1', 'cra 78', 'http://localhost/gesportCI/assets/img/basket.jpg'),
+(6, 'prueba', 5, 'asdfas', '1', 'cra 9', 'http://localhost/gesportCI/assets/img/basket.jpg'),
+(7, 'prueba2', 6, 'asdfsadf', '1', 'cra 9', 'assets/img/basket.jpg');
 
 -- --------------------------------------------------------
 
@@ -349,7 +350,7 @@ ALTER TABLE `deportes`
 -- AUTO_INCREMENT de la tabla `escenario`
 --
 ALTER TABLE `escenario`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
 -- AUTO_INCREMENT de la tabla `horario`
