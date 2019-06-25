@@ -1,4 +1,60 @@
+
 <div class="container">
+<div class="row">
+		<h3>
+			Calendario Escenarios</h3>
+</div><br>	
+<div class="card">
+  <div class="card-header">
+    Filtros
+  </div>
+  <div class="card-body">
+	  <div class="row checkbox">
+			<div class="form-check form-check-inline Checkclub">
+			<input type="checkbox" id="Checkclub" class="form-check-input"><label class="form-check-label" for="Checkclub"> Calendario de su club</label>
+			</div>
+
+			<div class="form-check form-check-inline Checkclubes">
+			<input type="checkbox" id="Checkclubes" class="form-check-input"><label class="form-check-label" for="Checkclubes"> Calendario de los clubes</label>
+			</div>
+
+			<div class="form-group row col-md-8">
+			
+			<div class="row">
+			<div class="col">
+			<label for="fecha">Buscar por fecha</label>
+			<input type="date" class="form-control" id="fecha">
+				<button id="bdate">Buscar</button>
+			</div>
+			<div class="col">
+				<label for="fecha">Buscar por Escenario</label>
+				<select name="besc" class="form-control" id="besc">
+					<option value="">
+					<?php 
+                        foreach ($listesc as $row) {
+                            echo '<option value='.$row->id.'>'.$row->nombre.'</option>';
+                        }
+                    ?>
+					</option>
+				</select>
+			</div>	
+			<div class="col">
+			<label for="fecha">Buscar por Club</label>
+				<select name="bclub" class="form-control" id="bclub">
+					<option value="">
+					<?php 
+                        foreach ($listclub as $row) {
+                            echo '<option value='.$row->id.'>'.$row->nombre.'</option>';
+                        }
+                    ?>
+					</option>
+				</select>
+			</div>
+			</div>	
+			</div>
+	</div>
+  </div>
+</div>
 <div id='calendar'></div>
 </div>
 
@@ -34,6 +90,9 @@
 
 	$(document).ready(function() {
 
+		checkClub();
+
+		function checkClub() {
 		$.post('<?php echo base_url(); ?>Reserva/getReserva',
 			function(data) {
 			$('#calendar').fullCalendar({
@@ -76,62 +135,84 @@
 							{
 								title: 'All Day Event',
 								start: '2016-12-01'
-							},
-							{
-								title: 'Long Event',
-								start: '2016-12-07',
-								end: '2016-12-10'
-							},
-							{
-								id: 999,
-								title: 'Repeating Event',
-								start: '2016-12-09T16:00:00'
-							},
-							{
-								id: 999,
-								title: 'Repeating Event',
-								start: '2016-12-16T16:00:00'
-							},
-							{
-								title: 'Conference',
-								start: '2016-12-11',
-								end: '2016-12-13'
-							},
-							{
-								title: 'Meeting',
-								start: '2016-12-12T10:30:00',
-								end: '2016-12-12T12:30:00'
-							},
-							{
-								title: 'Lunch',
-								start: '2016-12-12T12:00:00'
-							},
-							{
-								title: 'Meeting',
-								start: '2016-12-12T14:30:00'
-							},
-							{
-								title: 'Happy Hour',
-								start: '2016-12-12T17:30:00'
-							},
-							{
-								title: 'Dinner',
-								start: '2016-12-12T20:00:00'
-							},
-							{
-								title: 'Birthday Party',
-								start: '2016-12-13T07:00:00'
-							},
-							{
-								title: 'Click for Google',
-								url: 'http://google.com/',
-								start: '2016-12-28'
 							}
 						]
 						*/
 					});
 			});
+		}
+			$('#Checkclubes').click(function() {
+					$('#Checkclub').prop('checked', false); // quita la seleccion
+				if($(this).is(":checked")) {
+				$.post('<?php echo base_url(); ?>Reserva/getCheckclubes',
+				function(data) {
+					var obj = JSON.parse(data);
+					$('#calendar').fullCalendar('removeEvents'); // remueve los eventos de la consulta anterior
+					$('#calendar').fullCalendar('addEventSource', obj); //agrega los nuevos eventos al calendario
+				});
+				}
+				else {
+					$.post('<?php echo base_url(); ?>Reserva/getReserva',
+				function(data) {
+					var obj = JSON.parse(data);
+					$('#calendar').fullCalendar('removeEvents'); // remueve los eventos de la consulta anterior
+					$('#calendar').fullCalendar('addEventSource', obj); //agrega los nuevos eventos al calendario
+				});
+				}
+			});
+
+			$('#Checkclub').click(function() {
+					$('#Checkclubes').prop('checked', false); // quita la seleccion
+				if($(this).is(":checked")) {
+				$.post('<?php echo base_url(); ?>Reserva/getReserva',
+				function(data) {
+					var obj = JSON.parse(data);
+					$('#calendar').fullCalendar('removeEvents'); // remueve los eventos de la consulta anterior
+					$('#calendar').fullCalendar('addEventSource', obj); //agrega los nuevos eventos al calendario
+				});
+				}
+			});
 		
+			$('#bdate').click(function() {
+			$('#show_data').html('');
+			var text = $('#fecha').val();
+			$.ajax({
+				type  : 'POST',
+				url   : '<?php echo base_url() ?>Reserva/getResDate',
+				data : {text:text},
+				success : function(data){
+					var obj = JSON.parse(data);
+					$.each(obj, function(i, item) {
+					//alert(obt.fecha_hora_inicio)
+					$('#calendar').fullCalendar('removeEvents'); // remueve los eventos de la consulta anterior
+					$('#calendar').fullCalendar('addEventSource', obj); //agrega los nuevos eventos al calendario
+					});
+				}
+
+			});
+		});
+
+		$('#besc').change(function() {
+			var id = $(this).find(":selected").val();
+			$.post('<?php echo base_url(); ?>Reserva/getEscReserva/'+id,
+			function(esc) {
+				var obj = JSON.parse(esc);
+				$('#calendar').fullCalendar('removeEvents'); // remueve los eventos de la consulta anterior
+				$('#calendar').fullCalendar('addEventSource', obj); //agrega los nuevos eventos al calendario
+			});
+
+		});
+
+		$('#bclub').change(function() {
+			var id = $(this).find(":selected").val();
+			$.post('<?php echo base_url(); ?>Reserva/getClubReserva/'+id,
+			function(club) {
+				var obj = JSON.parse(club);
+				$('#calendar').fullCalendar('removeEvents'); // remueve los eventos de la consulta anterior
+				$('#calendar').fullCalendar('addEventSource', obj); //agrega los nuevos eventos al calendario
+			});
+
+		});
 		
 		
 	});

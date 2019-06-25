@@ -30,6 +30,13 @@ public function add_deportista() {
     $this->db->insert('deportista', $data);
 }
 
+public function getDepbyName($text) {
+    $this->db->from('deportista');
+    $this->db->like('nombre', $text, 'both');
+    $r = $this->db->get();
+    return $r->result();
+}
+
 public function lista() {
     $query = $this->db->get("deportista");
     return $query->result();

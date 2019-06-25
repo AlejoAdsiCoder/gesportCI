@@ -5,7 +5,7 @@ class Deportista extends CI_Controller {
 
         $this->load->helper(array('form', 'url'));        
         // Libreria para iniciar sesión
-        $this->load->library('session');
+        //$this->load->library('session');
         //Carga la libreria
         // $this->load->library("excel");
         //$this->load->library('html2pdf');
@@ -31,11 +31,13 @@ class Deportista extends CI_Controller {
 
         public function carga_layout($template) 
         {
-            $this->load->view('header');
-            if(isset($_SESSION['d_id'])) {
-                $this->load->view('nav');
-                $this->load->view($template);
-            }
+            $this->load->view('layouts/headerf');
+            
+            $this->load->view('nav');
+            $this->load->view($template);
+            /*
+            if(isset($_SESSION['a_nombre'])) {
+            }*/
         }
 
         public function crearDeportista() {
@@ -45,6 +47,12 @@ class Deportista extends CI_Controller {
         public function nuevoDeportista() {
             $this->mdeportista->add_deportista();
            // redirect('/paciente');
+        }
+
+        public function getDepbyName() {
+            $text = $this->input->post('text');
+            $resultado = $this->mdeportista->getDepbyName($text);
+            echo json_encode($resultado);
         }
 
         public function edit($cedula)

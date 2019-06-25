@@ -3,7 +3,8 @@
   <div class="card-header">
   <i class="fas fa-user"></i>Lista de Deportistas
   <button type="button" class="btn btn-success btn-lg">Nuevo Deportista</button>
-  </div>
+   <label for="">Buscar</label> <input type="text" class="form-control col-sm-3" id="search" ><input type="button" id="buscar" class="btn btn-success" value="buscar">
+</div>
   <div class="card-body">
     <div class="side col-md-8">
     <table class="table table-sm">
@@ -290,6 +291,43 @@ $('#delete').on('click',function(){
         }
     });
     return false;
+});
+
+
+$('#search').keyup(function() {
+    $('#show_data').html('');
+    var text = $(this).val();
+    $.ajax({
+        type  : 'POST',
+        url   : '<?php echo base_url() ?>Deportista/getDepbyName',
+        data : {text:text},
+        success : function(data){
+            var obj = JSON.parse(data);
+            var html = '';
+            $.each(obj, function(i, item) {
+                html += '<tr>'+
+                '<td>'+item.cedula+'</td>'+
+                '<td>'+item.tipo_documento+'</td>'+
+                '<td>'+item.nombre+'</td>'+
+                '<td>'+item.apellidos+'</td>'+
+                '<td>'+item.telefono+'</td>'+
+                '<td>'+item.celular+'</td>'+
+                '<td>'+item.email+'</td>'+
+                '<td>'+item.fecha_nacimiento+'</td>'+
+                '<td>'+item.barrio+'</td>'+
+                '<td>'+item.direccion+'</td>'+
+                '<td>'+item.estatura+'</td>'+
+                '<td>'+item.peso+'</td>'+
+                '<td>'+item.deporte+'</td>'+
+                '<td>'+item.password+'</td>'+
+                '<td>'+'<button data-toggle="modal" data-target="#edit-dep" class="btn btn-primary edit-dep" value="'+item.cedula+'"><i class="far fa-edit"></i></button></td>'+
+                '<td>'+'<button data-toggle="modal" data-target="#del-dep" class="btn btn-primary del-dep" value="'+item.cedula+'"><i class="far fa-delete"></i></button></td>'+
+                '</tr>';
+            });
+            $('#show_data').append(html);
+        }
+
+    });
 });
 
 });

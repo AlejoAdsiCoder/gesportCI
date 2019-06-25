@@ -52,7 +52,6 @@
                         <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Ex doloribus fugit hic amet laborum necessitatibus praesentium, sit vero, quidem quibusdam provident ducimus. Corporis, consectetur? Vero tempora mollitia repellendus alias quibusdam.</p>
                         <button class="btn btn-outline-primary text-white btn-lg">Leer mas</button>
                     </div>
-                    <!---
                     <div class="col-md-4 header-content-right">
                         <h3>Solicita un escenario para entrenar</h3>
                         <div class="form-group">
@@ -90,7 +89,6 @@
                         </div>
                         <button class="btn btn-outline-success btn-lg btn-block text-white">Solicitar</button>
                     </div>
-                    -->
                 </div>
             </div>
         </div>

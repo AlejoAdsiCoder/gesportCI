@@ -19,7 +19,10 @@
         <a class="nav-link dropdown-toggle" href="<?php echo base_url();?>Entrenador" id="entrenadores" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Entrenadores</a>
       </li>
       <li class="nav-item dropdown">
-        <a class="nav-link dropdown-toggle" href="<?php echo base_url();?>Reserva" id="esc" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Reservas</a>
+        <a class="nav-link dropdown-toggle" href="#" id="res" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Reservas</a>
+        <div class="dropdown-menu" aria-labelledby="res">
+          <a class="dropdown-item" href="<?php echo base_url(); ?>Reserva/crearReserva">Realizar reserva</a>
+          <a class="dropdown-item" href="<?php echo base_url(); ?>Reserva">Ver Calendario</a>
       </li>
       <li class="nav-item dropdown">
         <a class="nav-link dropdown-toggle" href="<?php echo base_url();?>Escenario" id="esc" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Escenarios Deportivos</a>
