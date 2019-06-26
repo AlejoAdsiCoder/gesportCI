@@ -73,8 +73,18 @@
         }
 
         public function lista() {
-            $query = $this->db->get("reserva");
-            return $query->result();
+            $con=mysqli_connect("localhost","root","","gesport") or die("Problemas con la conexión");
+           
+                $registros = mysqli_query($con, "select reserva.id AS id, c.nombre AS club, e.nombre AS escenario, reserva.descripcion AS title, fecha_hora_inicio AS start, fecha_hora_fin AS end, reserva.estado AS estado FROM reserva INNER JOIN club AS c ON reserva.club_id = c.id INNER JOIN escenario AS e ON reserva.escenario_id = e.id") or
+                die("Problemas en el select:".mysqli_error($con));
+            
+            
+
+            $data = array();
+            while($rows = mysqli_fetch_assoc($registros)) {
+                $data[] = $rows;
+            }
+            return $data;
         }
         
 /*

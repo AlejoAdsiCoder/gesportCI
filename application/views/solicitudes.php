@@ -181,16 +181,30 @@ $(document).ready(function() {
                     var html = '';
                     var i;
                     for(i=0; i < data.length; i++){
+                        var state = '';
+                        switch(data[i].estado) {
+                            case '1': 
+                                state = 'Pendiente Aprobración';
+                                break;
+                            case '2':
+                                state = 'Aprobado';
+                                break;
+                            case '3':
+                                state = 'Realizado';
+                                break;
+                            default:
+                                state = '0';
+                                break;
+                        }
                       
                         html += '<tr>'+
                         '<td>'+data[i].id+'</td>'+
-                        '<td>'+data[i].club_id+'</td>'+
-                        '<td>'+data[i].escenario_id+'</td>'+
-                        '<td>'+data[i].descripcion+'</td>'+
-                        '<td>'+data[i].fecha_hora_inicio+'</td>'+
-                        '<td>'+data[i].fecha_hora_fin+'</td>'+
-                        '<td>'+data[i].estado+'</td>'+
-                        '<td>'+'<select id="state"><option value></option></select>+'</td>'+
+                        '<td>'+data[i].club+'</td>'+
+                        '<td>'+data[i].escenario+'</td>'+
+                        '<td>'+data[i].title+'</td>'+
+                        '<td>'+data[i].start+'</td>'+
+                        '<td>'+data[i].end+'</td>'+
+                        '<td>'+state+'</td>'+
                         '<td>'+'<button data-toggle="modal" data-target="#edit-dep" class="btn btn-primary edit-dep" value="'+data[i].id+'"><i class="far fa-edit"></i></button></td>'+
                         '<td>'+'<button data-toggle="modal" data-target="#del-dep" class="btn btn-primary del-dep" value="'+data[i].id+'"><i class="far fa-delete"></i></button></td>'+
                         '</tr>';

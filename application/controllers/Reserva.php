@@ -61,9 +61,10 @@ class Reserva extends CI_Controller {
             $datases["usu"] = $_SESSION['e_id'];
         } elseif(isset($_SESSION['a_nombre'])) {
             $datases["usu"] = $_SESSION['a_nombre'];
-        } elseif(isset($_SESSION['d_id'])) {
-            redirect('/login');
-        }
+            
+        }/* elseif(isset($_SESSION['d_id'])) {
+            header('location:'.base_url()."Login/".$this->index());  
+        }*/
 
         $this->carga_layout("solicitudes", $datases);
     }
