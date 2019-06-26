@@ -12,6 +12,9 @@ class Reserva extends CI_Controller {
 
         //Carga del Modelo
         $this->load->model('mreserva');
+        $this->load->model('mescenario');
+        $this->load->model('mclub');
+        
         
         
         //$this->load->model("excel_export_model");
@@ -25,12 +28,59 @@ class Reserva extends CI_Controller {
         } elseif(isset($_SESSION['d_id'])) {
             $datases["usu"] = $_SESSION['d_id'];
         }
+        
         // $data["deportistas_data"] = $this->mdeportista->lista();
         // $this->carga_layout("lista_deportistas",$data);
-        $this->carga_layout("lista_reservas", $datases);
+        
+        $data["listclub"] = $this->mclub->listclub();
+        $data["listesc"] = $this->mescenario->lista();
+        $this->carga_layout("lista_reservas", $datases, $data);
     }
 
-    public function carga_layout($template, $datases) 
+    public function lista($esc) {
+        $data = $this->mreserva->gethorarios($esc);
+        echo json_encode($data);
+    }
+
+    public function crearReserva() {
+        if(isset($_SESSION['e_id'])) {
+            $datases["usu"] = $_SESSION['e_id'];
+        } elseif(isset($_SESSION['a_nombre'])) {
+            $datases["usu"] = $_SESSION['a_nombre'];
+        } elseif(isset($_SESSION['d_id'])) {
+            redirect('/login');
+        }
+        
+        $data["listclub"] = $this->mclub->listclub();
+        $data["listesc"] = $this->mescenario->lista();
+        $this->carga_layout("crear_reserva", $datases, $data);
+    }
+
+    public function listSolicitudes() {
+        if(isset($_SESSION['e_id'])) {
+            $datases["usu"] = $_SESSION['e_id'];
+        } elseif(isset($_SESSION['a_nombre'])) {
+            $datases["usu"] = $_SESSION['a_nombre'];
+        } elseif(isset($_SESSION['d_id'])) {
+            redirect('/login');
+        }
+
+        $this->carga_layout("solicitudes", $datases);
+    }
+
+    public function nuevo() {
+        /*
+        $this->load->database();
+
+        $insert = $this->input->post();
+        $result = $this->db->insert('club', $insert);
+        */
+        
+        $insert = $this->mreserva->add();
+        echo json_encode($insert);
+    }
+
+    public function carga_layout($template, $datases = '', $data = '') 
     {
         $this->load->view('header');
         if(isset($_SESSION['e_id'])) {
@@ -40,7 +90,7 @@ class Reserva extends CI_Controller {
         } elseif(isset($_SESSION['d_id'])) {
             $this->load->view('nav');
         }
-        $this->load->view($template);
+        $this->load->view($template, $data);
     }
 
     public function getReserva() {
@@ -50,5 +100,31 @@ class Reserva extends CI_Controller {
             $query = $this->mreserva->getReservas();
         }
         echo json_encode($query);
+    }
+
+    public function getCheckclubes() {
+        $query = $this->mreserva->getReservas();
+        echo json_encode($query);
+    }
+
+    public function getResDate() {
+        $text = $this->input->post('text');
+        $resultado = $this->mreserva->getResDate($text);
+        echo json_encode($resultado);
+    } 
+
+    public function getEscReserva($id) {
+        $res = $this->mreserva->getEscReserva($id);
+        echo json_encode($res);
+    } 
+
+    public function getClubReserva($id) {
+        $res = $this->mreserva->getClubReserva($id);
+        echo json_encode($res);
+    } 
+
+    public function res_data() {
+        $datos = $this->mreserva->lista();
+        echo json_encode($datos);
     }
 }

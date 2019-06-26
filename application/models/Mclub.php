@@ -14,7 +14,8 @@
         return $result;
     }
 
-    public function lista() {
+    public function listclub() {
+        $this->db->order_by("nombre", "ASC");
         $query = $this->db->get("club");
         return $query->result();
     }

@@ -12,6 +12,11 @@
     <script src='<?php echo base_url(); ?>assets/fullcalendar/lib/jquery.min.js'></script>
     <script src='<?php echo base_url(); ?>assets/fullcalendar/fullcalendar.min.js'></script>
     <link href='<?php echo base_url(); ?>assets/css/calendar.css' rel='stylesheet' />
+    <link href='<?php echo base_url(); ?>assets/css/creserva.css' rel='stylesheet' />
+    <link href='<?php echo base_url(); ?>assets/css/nav.css' rel='stylesheet' />
+   <!-- <link href='<?php echo base_url(); ?>assets/css/main.css' rel='stylesheet' /> -->
+   
     <title>Document</title>                                     
 </head>
 <body>
+    <div class="wrap">

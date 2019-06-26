@@ -1,0 +1,27 @@
+.wrap {
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: row;
+  height: 100%;
+}
+.wrap nav.sidebar {
+  display: flex;
+  flex-direction: column;
+  /*position: fixed;
+  top: 0;
+  left: 0;*/
+  width: 20%;
+  height: 100%;
+  background: #1f1d1d;
+}
+.wrap nav.sidebar div {
+  width: 100%;
+  padding: 20px;
+  margin: 0 auto;
+  color: white;
+}
+.wrap .main {
+  width: 54%;
+}
+
+/*# sourceMappingURL=main.css.map */
