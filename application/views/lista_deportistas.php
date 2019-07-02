@@ -1,10 +1,15 @@
 <div class="container-fluid">
 <div class="card">
+
   <div class="card-header">
   <i class="fas fa-user"></i>Lista de Deportistas
+
   <button type="button" class="btn btn-success btn-lg">Nuevo Deportista</button>
+<!---   
    <label for="">Buscar</label> <input type="text" class="form-control col-sm-3" id="search" ><input type="button" id="buscar" class="btn btn-success" value="buscar">
+--->
 </div>
+
   <div class="card-body">
     <div class="side col-md-8">
     <table class="table table-sm">
@@ -260,7 +265,7 @@ function show_deport() {
                         '<td>'+data[i].deporte+'</td>'+
                         '<td>'+data[i].password+'</td>'+
                         '<td>'+'<button data-toggle="modal" data-target="#edit-dep" class="btn btn-primary edit-dep" value="'+data[i].cedula+'"><i class="far fa-edit"></i></button></td>'+
-                        '<td>'+'<button data-toggle="modal" data-target="#del-dep" class="btn btn-primary del-dep" value="'+data[i].cedula+'"><i class="far fa-delete"></i></button></td>'+
+                        '<td>'+'<button data-toggle="modal" data-target="#del-dep" class="btn btn-danger del-dep" value="'+data[i].cedula+'"><i class="fas fa-user-minus"></i></button></td>'+
                         '</tr>';
                     }
                     $('#show_data').html(html);

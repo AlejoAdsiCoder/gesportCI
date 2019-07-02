@@ -258,7 +258,7 @@ function show_club() {
                         '<td>'+data[i].estado+'</td>'+
                         '<td>'+data[i].entrenador_cedula+'</td>'+
                         '<td>'+'<button data-toggle="modal" data-target="#edit-club" class="btn btn-primary edit-club" value="'+data[i].id+'"><i class="far fa-edit"></i></button></td>'+
-                        '<td>'+'<button data-toggle="modal" data-target="#del-club" class="btn btn-primary del-club" value="'+data[i].id+'"><i class="far fa-delete"></i></button></td>'+
+                        '<td>'+'<button data-toggle="modal" data-target="#del-club" class="btn btn-danger del-club" value="'+data[i].id+'"><i class="far fa-trash-alt"></i></button></td>'+
                         '</tr>';
                     }
                     $('#show_data').html(html);

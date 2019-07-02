@@ -60,6 +60,31 @@ class Escenario extends CI_Controller {
         */
     }
 
+    public function edit($id)
+    {
+        $this->load->database();
+        $q = $this->db->get_where('escenario', array('id' => $id));
+        echo json_encode($q->row());
+    }
+
+    public function update($id) {
+        $this->load->database();
+
+        $data = array(
+            'nombre' => $this->input->post('nombre'),
+            'deporte'  => $this->input->post('deporte'),
+            'descripcion'=> $this->input->post('desc'),
+            'disponibilidad' => $this->input->post('dis'),
+            'direccion' => $this->input->post('dir')
+        );
+        $this->db->where('id', $id);
+        $this->db->update('escenario', $data);
+        $q = $this->db->get_where('escenario', array('id' => $id));
+
+
+        echo json_encode($q->row());
+    }
+
     public function lista() {
         $data = $this->mescenario->lista();
         echo json_encode($data);

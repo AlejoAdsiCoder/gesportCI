@@ -4,6 +4,7 @@
 		<h3>
 			Calendario Escenarios</h3>
 </div><br>	
+
 <div class="card">
   <div class="card-header">
     Filtros
@@ -55,7 +56,25 @@
 	</div>
   </div>
 </div>
-<div id='calendar'></div>
+<div class="row mt-3">
+<div class="col-md-9" id='calendar'></div>
+<div class="card col-md-3" style="width: 18rem;">
+  <div class="card-header">
+    Convenciones
+  </div>
+  <ul class="list-group list-group-flush">
+    <li class="list-group-item">
+	<span class="badge badge-pill badge-danger">Pendiente de Aprobación</span>
+	</li>
+    <li class="list-group-item">
+	<span class="badge badge-pill badge-primary">Aprobado</span>
+	</li>
+    <li class="list-group-item">
+	<span class="badge badge-pill badge-success">Confirmado</span>
+	</li>
+  </ul>
+</div>
+</div>
 </div>
 
 <div id="detalleModal" class="modal fade">
@@ -69,17 +88,14 @@
  <h4 id="mdTitle" class="modal-title"></h4>
  <p id="mdclub"></p>
  <p id="mdesc"></p>
+ <p id="mstate"></p>
  <p id="mdfinicio"></p>
  <p id="mdfin"></p>
  </div>
  <input type="hidden" id="eventID"/>
  <div class="modal-footer">
 
- 	<button class="btn btn-warning" id="confirmarTodos" data-dismiss="modal" aria-hidden="true">Confirmar Todos </button>
-  <button class="btn btn-success" id="confirmar" data-dismiss="modal" aria-hidden="true">Confirmar</button>
-
  <button class="btn" data-dismiss="modal" aria-hidden="true">Cancel</button>
- <button type="submit" class="btn btn-danger" id="deleteButton">Delete</button>
  </div>
  </div>
 </div>
@@ -105,7 +121,25 @@
 						navLinks: true, // can click day/week names to navigate views
 						editable: true,
 						eventLimit: true, // allow "more" link when too many events
+						eventTextColor:'#fff',
+						eventRender: function(event, element) {
+							switch(event.state) {
+								case '1':
+									element.css('background-color', '#B0582C');
+									break;
+								case '2':
+									element.css('background-color', '#4757F6');
+									break;
+								case '3':
+									element.css('background-color', '#64B02C');
+									break;
+								default:
+									element.css('background-color', 'black');
+									break;
+							}
+						},
 						events: $.parseJSON(data),
+						
 						eventClick: function(event) {
 							/*
 							horaini = $.fullCalendar.formatDate(event.start, {
@@ -126,6 +160,7 @@
 							$('#mdTitle').html(event.title);
 							$('#mdclub').html(event.club);
 							$('#mdesc').html(event.escenario);
+							$('#mstate').html(event.state)
 							$('#mdfinicio').html(horaini);
 							$('#mdfin').html(horafin);
 							$('#detalleModal').modal('show');
@@ -147,6 +182,7 @@
 				$.post('<?php echo base_url(); ?>Reserva/getCheckclubes',
 				function(data) {
 					var obj = JSON.parse(data);
+					alert(obj[3].state);
 					$('#calendar').fullCalendar('removeEvents'); // remueve los eventos de la consulta anterior
 					$('#calendar').fullCalendar('addEventSource', obj); //agrega los nuevos eventos al calendario
 				});
@@ -186,6 +222,7 @@
 					//alert(obt.fecha_hora_inicio)
 					$('#calendar').fullCalendar('removeEvents'); // remueve los eventos de la consulta anterior
 					$('#calendar').fullCalendar('addEventSource', obj); //agrega los nuevos eventos al calendario
+
 					});
 				}
 

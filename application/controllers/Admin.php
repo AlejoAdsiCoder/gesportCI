@@ -5,7 +5,8 @@
             $this->load->helper(array('form', 'url'));        
             // Libreria para iniciar sesión
             $this->load->library('session');
-            
+            //Carga del Modelo
+             $this->load->model('mreserva');
                                                            
         }
 
@@ -13,7 +14,7 @@
         {
             $datases["usu"] = $_SESSION['a_nombre'];
             // $this->carga_layout("lista_deportistas",$data);
-            $this->carga_layout('vAdmin', $datases);
+            $this->carga_layout('list_notificaciones', $datases);
         }
 
         public function carga_layout($template, $datases) 
@@ -25,5 +26,10 @@
                 $this->load->view('layouts/admin/nav', $datases);
                 $this->load->view($template);
             }
+        }
+
+        public function res_data() {
+            $datos = $this->mreserva->lista();
+            echo json_encode($datos);
         }
     }

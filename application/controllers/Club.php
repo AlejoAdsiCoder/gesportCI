@@ -5,7 +5,7 @@ class Club extends CI_controller {
         parent::__construct();            
         $this->load->helper(array('form', 'url'));        
         // Libreria para iniciar sesión
-        // $this->load->library('session');
+        $this->load->library('session');
         //Carga la libreria
         // $this->load->library("excel");
         //$this->load->library('html2pdf');
@@ -15,17 +15,28 @@ class Club extends CI_controller {
     }
     public function index()
     {
+        if(isset($_SESSION['e_id'])) {
+            $datases["usu"] = $_SESSION['e_id'];
+        } elseif(isset($_SESSION['a_nombre'])) {
+            $datases["usu"] = $_SESSION['a_nombre'];
+        } elseif(isset($_SESSION['d_id'])) {
+            $datases["usu"] = $_SESSION['d_id'];
+        }
         // $data["deportistas_data"] = $this->mdeportista->lista();
         // $this->carga_layout("lista_deportistas",$data);
-        $this->carga_layout("lista_club");
+        $this->carga_layout("lista_club", $datases);
     }
     
-    public function carga_layout($template) 
+    public function carga_layout($template, $datases = '') 
     {
         
         $this->load->view('header');
-        if(isset($_SESSION['e_rol'])) {
+        if(isset($_SESSION['e_id'])) {
             $this->load->view('layouts/entrenador/nav');
+        } elseif(isset($_SESSION['a_nombre'])) {
+            $this->load->view('layouts/admin/nav', $datases);
+        } elseif(isset($_SESSION['d_id'])) {
+            $this->load->view('nav');
         }
         $this->load->view($template);
     }   
@@ -73,7 +84,7 @@ class Club extends CI_controller {
     
 
     public function lista() {
-        $data = $this->mclub->lista();
+        $data = $this->mclub->listclub();
         echo json_encode($data);
     }
 }

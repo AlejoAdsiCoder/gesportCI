@@ -182,11 +182,10 @@ $("#click").click(function() {
     $.ajax({
         type: 'POST',
         url: '<?php echo base_url() ?>Reserva/nuevo',
-        dataType: "JSON",
         data: {id:id, club:club, escenario:escenario, descripcion:descripcion, fh_inicio:fh_inicio, fh_fin:fh_fin, estado:estado},
     }).done(function(data) {
         if(data) {
-             alert("Valores: \n" + data);
+            window.location.replace(data); 
         }
         else {
            alert("error");

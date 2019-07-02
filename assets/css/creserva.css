@@ -18,13 +18,19 @@ div.main {
     height: auto;
     color: white;
 }
-
-div.side .listh {
+.listh {
     background: rgba(0, 0, 0, 0.6);
     height: 550px;
     color: white;
     display: none;
 }
+
+/*
+div.side .listh .col-md-5 {
+    background: rgba(0, 0, 0, 0.6);
+    height: 550px;
+    color: white;
+}*/
 
 div.side #list .days {
     display: none;

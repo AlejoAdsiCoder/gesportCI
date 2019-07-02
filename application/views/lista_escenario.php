@@ -55,7 +55,10 @@
                 </div>
                 <div class="form-group">
                 <label for="disponible">Disponibilidad</label>
-                <select name="disponible" class="form-control" id="disponible_edit"></select>
+                <select name="disponible" class="form-control" id="disponible_edit">
+                    <option value="1">Libre</option>
+                    <option value="2">Ocupado</option>
+                </select>
                 </div>
                 <div class="form-group">
                 <label for="foto">Foto</label>
@@ -124,8 +127,8 @@
                 <div class="form-group">
                 <label for="disponible">Disponibilidad</label>
                 <select name="disponible" class="form-control" id="disponible">
-                    <option value="1">Activo</option>
-                    <option value="2">No disponible</option>
+                    <option value="1">Libre</option>
+                    <option value="2">Ocupado</option>
                 </select>
                 </div>
                 <div class="form-group">
@@ -166,16 +169,15 @@ $(document).ready(function() {
      $.ajax({
         url: url + '/' + esc_id,
         success: function (data) {
-          alert(data);
         if(data) {
             var datos = JSON.parse(data);
-            $('#id').val(datos.id);
-            $('#nombre').val(datos.nombre);
-            $('#deporte').val(datos.deporte_entrenamiento);
-            $('#fecha_registro').val(datos.fecha_registro);
-            $('#cupo').val(datos.cupo);
-            $('#estado').val(datos.estado);
-            $('#entrenador').val(datos.entrenador_cedula);
+            $('#id_edit').val(datos.id);
+            $('#nombre_edit').val(datos.nombre);
+            $('#deporte_edit').val(datos.deporte);
+            $('#desc_edit').val(datos.descripcion);
+            $('#disponible_edit').val(datos.disponibilidad);
+            $('#foto_edit').val(datos.foto);
+            $('#direccion_edit').val(datos.direccion);
         }
             else
                 alert("Nanay");
@@ -196,18 +198,18 @@ $(document).ready(function() {
         var id = $('#id_edit').val();
         var nombre = $('#nombre_edit').val();
         var deporte = $('#deporte_edit').val();
-        var fecha = $('#fecha_registro_edit').val();
-        var cupo = $('#cupo_edit').val();
-        var estado = $('#estado_edit').val();
-        var entrenador = $('#entrenador_edit').val();
-
+        var desc = $('#desc_edit').val();
+        var dis = $('#disponible_edit').val();
+        var foto = $('#foto_edit').val();
+        var dir = $('#direccion_edit').val();
+        alert(id+''+nombre+''+deporte+''+desc+''+dis+''+foto+''+dir);
         $.ajax({
             dataType: 'json',
             type:'POST',
             url: '<?php echo base_url() ?>Escenario/update/' + id,
-            data:{nombre:nombre, deporte:deporte, fecha:fecha, cupo:cupo, estado:estado},
+            data:{nombre:nombre, deporte:deporte, desc:desc, dis:dis, dir:dir},
             }).done(function(data){
-
+                alert(data);
             $("#edit-esc").modal('hide');
             show_esc();
             
@@ -240,8 +242,7 @@ $(document).ready(function() {
 
             //data:{nombre:nombre, deporte:deporte, fecha:fecha, cupo:cupo, estado:estado, entrenador:entrenador},
             
-            }).done(function(data){
-                alert(data);
+            }).done(function(data) {
             $("#create-esc").modal('hide');
             show_esc();
             
@@ -257,7 +258,6 @@ function show_esc() {
                 async : true,
                 dataType : 'json',
                 success : function(data){
-                    alert(data);
                     var html = '';
                     var i;
                     for(i=0; i < data.length; i++){
@@ -272,7 +272,7 @@ function show_esc() {
                         '<td>'+'<img src="'+data[i].foto+'" width="90" height="90">'+'</td>'+
                         //'<td>'+'<img src="'+''+data[i].foto+'" width="90" height="90">'+'</td>'+
                         '<td>'+'<button data-toggle="modal" data-target="#edit-esc" class="btn btn-primary edit-esc" value="'+data[i].id+'"><i class="far fa-edit"></i></button></td>'+
-                        '<td>'+'<button data-toggle="modal" data-target="#del-esc" class="btn btn-primary del-esc" value="'+data[i].id+'"><i class="far fa-delete"></i></button></td>'+
+                        '<td>'+'<button data-toggle="modal" data-target="#del-esc" class="btn btn-danger del-esc" value="'+data[i].id+'"><i class="far fa-trash-alt"></i></button></td>'+
                         '</tr>';
                     }
                     $('#show_data').html(html);

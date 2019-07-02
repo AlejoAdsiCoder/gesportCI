@@ -10,21 +10,11 @@
         <a class="nav-link" href="#">Inicio <span class="sr-only">(current)</span></a>
       </li>
       <li class="nav-item dropdown">
-        <a class="nav-link dropdown-toggle" href="#" id="clubes" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Clubes</a>
-      
-      <div class="dropdown-menu" aria-labelledby="club">
-        <a class="dropdown-item" href="#">Administrar</a>
-        <a class="dropdown-item" href="<?php echo base_url();?>Club/Crear">Registrar Clubes</a>
-        <a class="dropdown-item" href="#">Añadir Deportistas</a>
-      </div>
-      </li>
-      <li class="nav-item dropdown">
         <a class="nav-link dropdown-toggle" href="#" id="reservas" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Reservas</a>
       
       <div class="dropdown-menu" aria-labelledby="reserva">
-        <a class="dropdown-item" href="<?php echo base_url();?>Reserva">Lista de reservas</a>
-        <a class="dropdown-item" href="<?php echo base_url();?>">Reservar Escenario deportivo</a>
-        <a class="dropdown-item" href="#">Añadir Deportistas</a>
+        <a class="dropdown-item" href="<?php echo base_url();?>Reserva">Ver calendario</a>
+        <a class="dropdown-item" href="<?php echo base_url();?>Reserva/crearReserva">Reservar Escenario deportivo</a>
       </div>
       </li>
       <li class="nav-item dropdown">
@@ -39,8 +29,7 @@
         <a class="nav-link" href="<?php echo base_url();?>Login/logout" id="esc">Salir</a>
       </li>
     </ul>
-    <form class="form-inline my-2 my-md-0">
-      <input class="form-control" type="text" placeholder="Search">
-    </form>
+    <li class="nav-item">
+        <a href="nav-link" href="#" style="color:white" role="button" aria-haspopup="true" aria-expanded="false">Bienvenido <?php echo $usu; ?></a></li>
   </div>
-</nav> 
+</nav>  

@@ -5,7 +5,7 @@ class Entrenador extends CI_Controller {
 
         $this->load->helper(array('form', 'url'));        
         // Libreria para iniciar sesión
-        // $this->load->library('session');
+         $this->load->library('session');
         //Carga la libreria
         // $this->load->library("excel");
         //$this->load->library('html2pdf');
@@ -20,17 +20,18 @@ class Entrenador extends CI_Controller {
 
     public function index()
     {
+        $datases["usu"] = $_SESSION['a_nombre'];
         // $data["deportistas_data"] = $this->mdeportista->lista();
         // $this->carga_layout("lista_deportistas",$data);
-        $this->carga_layout("lista_entrenador");
+        $this->carga_layout("lista_entrenador", $datases);
     }
 
 
-    public function carga_layout($template) 
+    public function carga_layout($template, $datases) 
     {
         $this->load->view('header');
-        if(isset($_SESSION['e_id'])) {
-            $this->load->view('layouts/entrenador/nav');
+        if(isset($_SESSION['a_nombre'])) {
+            $this->load->view('layouts/admin/nav', $datases);
             $this->load->view($template);    
         }   
     }   
@@ -60,7 +61,7 @@ class Entrenador extends CI_Controller {
     public function update($cedula)
     {
         $this->load->database();
-
+        
         $insert = $this->input->post();
         $this->db->where('cedula', $cedula);
         $this->db->update('entrenador', $insert);

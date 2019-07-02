@@ -21,8 +21,8 @@ class Reserva extends CI_Controller {
     }
     public function index()
     {
-        if(isset($_SESSION['e_id'])) {
-            $datases["usu"] = $_SESSION['e_id'];
+        if(isset($_SESSION['e_nombre'])) {
+            $datases["usu"] = $_SESSION['e_nombre'];
         } elseif(isset($_SESSION['a_nombre'])) {
             $datases["usu"] = $_SESSION['a_nombre'];
         } elseif(isset($_SESSION['d_id'])) {
@@ -42,13 +42,54 @@ class Reserva extends CI_Controller {
         echo json_encode($data);
     }
 
+    public function edit($id)
+    {
+        $this->load->database();
+        $q = $this->db->get_where('reserva', array('id' => $id));
+        echo json_encode($q->row());
+    }
+
+    public function update($id)
+    {
+        $this->load->database();
+
+        $data = array(
+            'club_id' => $this->input->post('club'),
+            'escenario_id'  => $this->input->post('escenario'),
+            'descripcion'=> $this->input->post('descripcion'),
+            'fecha_hora_inicio' => $this->input->post('fh_inicio'),
+            'fecha_hora_fin' => $this->input->post('fh_fin'),
+            'estado' => $this->input->post('estado')
+        );
+        $this->db->where('id', $id);
+        $this->db->update('reserva', $data);
+        $q = $this->db->get_where('reserva', array('id' => $id));
+
+
+        echo json_encode($q->row());
+    }
+
+    public function upState($id)
+    {
+        $this->load->database();
+        $data = array(
+            'estado' => $this->input->post('status')
+        );
+
+        $this->db->where('id', $id);
+        $this->db->update('reserva', $data);
+        $q = $this->db->get_where('reserva', array('id' => $id));
+
+        echo json_encode($q->row());
+    }
+
     public function crearReserva() {
-        if(isset($_SESSION['e_id'])) {
-            $datases["usu"] = $_SESSION['e_id'];
+        if(isset($_SESSION['e_nombre'])) {
+            $datases["usu"] = $_SESSION['e_nombre'];
         } elseif(isset($_SESSION['a_nombre'])) {
             $datases["usu"] = $_SESSION['a_nombre'];
         } elseif(isset($_SESSION['d_id'])) {
-            redirect('/login');
+            $datases["usu"] = $_SESSION['d_id'];
         }
         
         $data["listclub"] = $this->mclub->listclub();
@@ -66,7 +107,9 @@ class Reserva extends CI_Controller {
             header('location:'.base_url()."Login/".$this->index());  
         }*/
 
-        $this->carga_layout("solicitudes", $datases);
+        $data["listclub"] = $this->mclub->listclub();
+        $data["listesc"] = $this->mescenario->lista();
+        $this->carga_layout("solicitudes", $datases, $data);
     }
 
     public function nuevo() {
@@ -77,15 +120,15 @@ class Reserva extends CI_Controller {
         $result = $this->db->insert('club', $insert);
         */
         
-        $insert = $this->mreserva->add();
-        echo json_encode($insert);
+        $this->mreserva->add();
+        echo base_url()."Reserva";
     }
 
     public function carga_layout($template, $datases = '', $data = '') 
     {
         $this->load->view('header');
-        if(isset($_SESSION['e_id'])) {
-            $this->load->view('layouts/entrenador/nav');
+        if(isset($_SESSION['e_nombre'])) {
+            $this->load->view('layouts/entrenador/nav', $datases);
         } elseif(isset($_SESSION['a_nombre'])) {
             $this->load->view('layouts/admin/nav', $datases);
         } elseif(isset($_SESSION['d_id'])) {
@@ -127,5 +170,10 @@ class Reserva extends CI_Controller {
     public function res_data() {
         $datos = $this->mreserva->lista();
         echo json_encode($datos);
+    }
+
+    function delete() {
+        $data=$this->mreserva->delete();
+        echo json_encode($data);
     }
 }

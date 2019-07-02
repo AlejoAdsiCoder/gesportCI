@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 21-06-2019 a las 01:19:10
+-- Tiempo de generación: 03-07-2019 a las 01:48:12
 -- Versión del servidor: 10.1.38-MariaDB
 -- Versión de PHP: 7.3.3
 
@@ -118,6 +118,7 @@ CREATE TABLE `deportista` (
 --
 
 INSERT INTO `deportista` (`cedula`, `tipo_documento`, `nombre`, `apellidos`, `rol`, `telefono`, `celular`, `email`, `fecha_nacimiento`, `barrio`, `direccion`, `estatura`, `peso`, `deporte`, `password`, `fecha_registro`) VALUES
+(254372, 1, 'Cristian', 'Perez', 2, 00000000000000357383, 3875239, 'ccrus@mail.co', '2019-06-24', 'campin', 'cra 5', '2', 45, 5, '543', '0000-00-00'),
 (1053830338, 0, 'Alejandro', 'Patino Cardona', 1, 00000000000300758771, 2147483647, 'apatino@gmail.com', '1993-10-15', 'san jorge', 'cl 46a #12345', '180', 45, 5, '1234', '0000-00-00');
 
 -- --------------------------------------------------------
@@ -174,7 +175,7 @@ CREATE TABLE `entrenador` (
 --
 
 INSERT INTO `entrenador` (`cedula`, `tipo_documento`, `nombre`, `apellidos`, `rol`, `email`, `telefono`, `celular`, `fecha_nacimiento`, `barrio`, `direccion`, `deporte`, `password`, `fecha_registro`) VALUES
-(52345, 0, 'Edwin', 'Perez', 2, 'mail@mail.co', 133124, 254524, '2019-05-14', 'san jorge', '', '3', '234', '0000-00-00'),
+(52345, 0, 'eduardo', 'Perez', 0, 'mail@mail.co', 133124, 254524, '2019-05-14', 'san jorge', '', '3', '234', '0000-00-00'),
 (52346, 0, 'juan', 'gomez', 2, 'jgomez@mail.co', 63524, 32154612, '2019-05-30', 'fatima', '', '2', '456', '0000-00-00'),
 (254245, 0, 'Pepito', 'perez', 2, 'mail@mail.co', 24527, 98797, '2019-05-13', 'san juan', '', '3', '456', '0000-00-00'),
 (1352345, 0, 'Carlos', 'garcia', 2, 'mail@mail.co', 23452, 3456653, '2019-05-16', 'san jorge', '', '3', '213452345', '0000-00-00');
@@ -192,7 +193,7 @@ CREATE TABLE `escenario` (
   `descripcion` varchar(45) NOT NULL,
   `disponibilidad` varchar(45) NOT NULL,
   `direccion` varchar(45) NOT NULL,
-  `foto` varchar(100) NOT NULL
+  `foto` varchar(100) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
@@ -200,13 +201,11 @@ CREATE TABLE `escenario` (
 --
 
 INSERT INTO `escenario` (`id`, `nombre`, `deporte`, `descripcion`, `disponibilidad`, `direccion`, `foto`) VALUES
-(1, 'coliseo mayor', 5, 'escenario deportivo', '1', 'cra 34 #20-20', ''),
+(1, 'coliseo mayor', 6, 'cancha de basquetball', '2', 'cra 34 #20-20', ''),
 (2, 'coliseo menor', 6, 'escenario deportivo', '1', 'cra 23 #20-20', ''),
-(3, 'futbol5', 7, 'escenario deportivo', '2', 'cll 55 #22-10', ''),
-(4, 'Multicancha san juan', 5, 'escenario deportivo', '3', 'cra 78 #45-20', ''),
 (5, 'prueba', 5, 'asdfasdf', '1', 'cra 78', 'http://localhost/gesportCI/assets/img/basket.jpg'),
-(6, 'prueba', 5, 'asdfas', '1', 'cra 9', 'http://localhost/gesportCI/assets/img/basket.jpg'),
-(7, 'prueba2', 6, 'asdfsadf', '1', 'cra 9', 'assets/img/basket.jpg');
+(8, 'Coliseo menor', 5, 'asdfafdsaf', '1', 'cra2', 'assets/img/background.jpg'),
+(9, 'complejo acuatico', 6, 'fadfasdfas', '1', 'cra 45', 'assets/img/sc4.jpg');
 
 -- --------------------------------------------------------
 
@@ -230,7 +229,9 @@ CREATE TABLE `horario` (
 INSERT INTO `horario` (`id`, `dia`, `jornada`, `hora_inicio`, `hora_fin`, `escenario_id`) VALUES
 (1, 'lunes', 'manana', '09:00:00', '11:00:00', 1),
 (2, 'miercoles', 'manana', '06:00:00', '12:00:00', 2),
-(3, 'viernes', 'tarde', '13:00:00', '18:00:00', 3);
+(3, 'viernes', 'tarde', '13:00:00', '18:00:00', 3),
+(4, 'lunes', 'tarde', '13:05:19', '15:05:30', 1),
+(5, 'miercoles', 'tarde', '14:11:07', '17:11:30', 1);
 
 -- --------------------------------------------------------
 
@@ -253,9 +254,12 @@ CREATE TABLE `reserva` (
 --
 
 INSERT INTO `reserva` (`id`, `club_id`, `escenario_id`, `descripcion`, `fecha_hora_inicio`, `fecha_hora_fin`, `estado`) VALUES
-(10, 1, 1, 'Entrenamiento', '2019-06-05 13:54:00', '2019-06-05 14:04:00', 1),
-(11, 2, 1, 'prueba 1', '2019-06-07 09:12:00', '2019-06-07 11:00:00', 2),
-(12, 2, 1, 'prueba 2', '2019-06-13 08:00:00', '2019-06-13 10:32:00', 2);
+(10, 5, 1, 'Entrenamiento', '2019-06-05 13:54:00', '2019-06-05 14:04:00', 2),
+(11, 5, 1, 'prueba 1', '2019-06-14 10:12:00', '2019-06-14 02:00:00', 1),
+(12, 2, 1, 'prueba 2', '2019-06-13 08:00:00', '2019-06-13 10:32:00', 1),
+(13, 1, 2, 'esto es una prueba', '2019-06-25 16:35:00', '2019-06-25 17:23:00', 1),
+(15, 2, 8, 'acondicionamiento para competir', '2019-07-03 14:45:00', '2019-07-03 15:42:00', 1),
+(21, 2, 2, 'acondicionamiento fisico', '2019-07-17 15:42:00', '2019-07-17 16:53:00', 1);
 
 --
 -- Índices para tablas volcadas
@@ -350,19 +354,19 @@ ALTER TABLE `deportes`
 -- AUTO_INCREMENT de la tabla `escenario`
 --
 ALTER TABLE `escenario`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 
 --
 -- AUTO_INCREMENT de la tabla `horario`
 --
 ALTER TABLE `horario`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT de la tabla `reserva`
 --
 ALTER TABLE `reserva`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=22;
 
 --
 -- Restricciones para tablas volcadas

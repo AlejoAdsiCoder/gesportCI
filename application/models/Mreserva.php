@@ -4,11 +4,11 @@
         public function getReservas($ent = '') {
             $con=mysqli_connect("localhost","root","","gesport") or die("Problemas con la conexión");
             if($ent == null) {
-                $registros = mysqli_query($con, "select reserva.id AS id, c.nombre AS club, e.nombre AS escenario, reserva.descripcion AS title, fecha_hora_inicio AS start, fecha_hora_fin AS end FROM reserva INNER JOIN club AS c ON reserva.club_id = c.id INNER JOIN escenario AS e ON reserva.escenario_id = e.id") or
+                $registros = mysqli_query($con, "select reserva.id AS id, c.nombre AS club, e.nombre AS escenario, reserva.descripcion AS title, fecha_hora_inicio AS start, fecha_hora_fin AS end, reserva.estado AS state FROM reserva INNER JOIN club AS c ON reserva.club_id = c.id INNER JOIN escenario AS e ON reserva.escenario_id = e.id") or
                 die("Problemas en el select:".mysqli_error($con));
             }
             else {
-                $registros = mysqli_query($con, "select reserva.id AS id, c.nombre AS club, e.nombre AS escenario, reserva.descripcion AS title, fecha_hora_inicio AS start, fecha_hora_fin AS end FROM reserva INNER JOIN club AS c ON reserva.club_id = c.id INNER JOIN escenario AS e ON reserva.escenario_id = e.id WHERE c.entrenador_cedula = '$ent'") or
+                $registros = mysqli_query($con, "select reserva.id AS id, c.nombre AS club, e.nombre AS escenario, reserva.descripcion AS title, fecha_hora_inicio AS start, fecha_hora_fin AS end, reserva.estado AS state FROM reserva INNER JOIN club AS c ON reserva.club_id = c.id INNER JOIN escenario AS e ON reserva.escenario_id = e.id WHERE c.entrenador_cedula = '$ent'") or
                 die("Problemas en el select:".mysqli_error($con));
             }
             
@@ -30,7 +30,7 @@
         public function getResDate($text) {
             $con=mysqli_connect("localhost","root","","gesport") or die("Problemas con la conexión");
            
-                $registros = mysqli_query($con, "select reserva.id AS id, c.nombre AS club, e.nombre AS escenario, reserva.descripcion AS title, fecha_hora_inicio AS start, fecha_hora_fin AS end FROM reserva INNER JOIN club AS c ON reserva.club_id = c.id INNER JOIN escenario AS e ON reserva.escenario_id = e.id WHERE DATE(fecha_hora_inicio) = '$text'") or
+                $registros = mysqli_query($con, "select reserva.id AS id, c.nombre AS club, e.nombre AS escenario, reserva.descripcion AS title, fecha_hora_inicio AS start, fecha_hora_fin AS end, reserva.estado AS state FROM reserva INNER JOIN club AS c ON reserva.club_id = c.id INNER JOIN escenario AS e ON reserva.escenario_id = e.id WHERE DATE(fecha_hora_inicio) = '$text'") or
                 die("Problemas en el select:".mysqli_error($con));
             
             
@@ -45,7 +45,7 @@
         public function getEscReserva($id) {
             $con=mysqli_connect("localhost","root","","gesport") or die("Problemas con la conexión");
            
-                $registros = mysqli_query($con, "select reserva.id AS id, c.nombre AS club, e.nombre AS escenario, reserva.descripcion AS title, fecha_hora_inicio AS start, fecha_hora_fin AS end FROM reserva INNER JOIN club AS c ON reserva.club_id = c.id INNER JOIN escenario AS e ON reserva.escenario_id = e.id WHERE escenario_id = '$id'") or
+                $registros = mysqli_query($con, "select reserva.id AS id, c.nombre AS club, e.nombre AS escenario, reserva.descripcion AS title, fecha_hora_inicio AS start, fecha_hora_fin AS end, reserva.estado AS state FROM reserva INNER JOIN club AS c ON reserva.club_id = c.id INNER JOIN escenario AS e ON reserva.escenario_id = e.id WHERE escenario_id = '$id'") or
                 die("Problemas en el select:".mysqli_error($con));
             
             
@@ -60,7 +60,7 @@
         public function getClubReserva($id) {
             $con=mysqli_connect("localhost","root","","gesport") or die("Problemas con la conexión");
            
-                $registros = mysqli_query($con, "select reserva.id AS id, c.nombre AS club, e.nombre AS escenario, reserva.descripcion AS title, fecha_hora_inicio AS start, fecha_hora_fin AS end FROM reserva INNER JOIN club AS c ON reserva.club_id = c.id INNER JOIN escenario AS e ON reserva.escenario_id = e.id WHERE club_id = '$id'") or
+                $registros = mysqli_query($con, "select reserva.id AS id, c.nombre AS club, e.nombre AS escenario, reserva.descripcion AS title, fecha_hora_inicio AS start, fecha_hora_fin AS end, reserva.estado AS state FROM reserva INNER JOIN club AS c ON reserva.club_id = c.id INNER JOIN escenario AS e ON reserva.escenario_id = e.id WHERE club_id = '$id'") or
                 die("Problemas en el select:".mysqli_error($con));
             
             
@@ -75,7 +75,7 @@
         public function lista() {
             $con=mysqli_connect("localhost","root","","gesport") or die("Problemas con la conexión");
            
-                $registros = mysqli_query($con, "select reserva.id AS id, c.nombre AS club, e.nombre AS escenario, reserva.descripcion AS title, fecha_hora_inicio AS start, fecha_hora_fin AS end, reserva.estado AS estado FROM reserva INNER JOIN club AS c ON reserva.club_id = c.id INNER JOIN escenario AS e ON reserva.escenario_id = e.id") or
+                $registros = mysqli_query($con, "select reserva.id AS id, c.nombre AS club, e.nombre AS escenario, reserva.descripcion AS title, fecha_hora_inicio AS start, fecha_hora_fin AS end, reserva.estado AS estado, reserva.estado AS state FROM reserva INNER JOIN club AS c ON reserva.club_id = c.id INNER JOIN escenario AS e ON reserva.escenario_id = e.id") or
                 die("Problemas en el select:".mysqli_error($con));
             
             
@@ -127,6 +127,13 @@
                 //'fecha_registro' => $this->input->post('fecha_registro');
             );
             $result = $this->db->insert('reserva', $data);
+            return $result;
+        }
+
+        public function delete() {
+            $id = $this->input->post('id');
+            $this->db->where('id', $id);
+            $result=$this->db->delete('reserva');
             return $result;
         }
     }

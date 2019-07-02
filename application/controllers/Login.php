@@ -26,7 +26,7 @@ public function check_login(){
             echo base_url()."Deportista";
             break;
         case 3:
-            echo base_url()."Entrenador";
+            echo base_url()."Reserva";
             break;
         default:
             echo "El usuario no existe";
