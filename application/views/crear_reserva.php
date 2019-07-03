@@ -119,6 +119,12 @@ $("#escenario").change(function() {
                 $(".side").css("display","block");
                 $("div.side #list").css("display","block");
                 var datos = JSON.parse(escData);
+                $("div.side #list .lun").css("display","none");
+                $("div.side #list .mar").css("display","none");
+                $("div.side #list .mie").css("display","none");
+                $("div.side #list .jue").css("display","none");
+                $("div.side #list .vie").css("display","none");
+                $("div.side #list .sab").css("display","none");
                 for(i = 0; i < datos.length; i++) {
                     if(datos[i].dia == "lunes") {
                         
