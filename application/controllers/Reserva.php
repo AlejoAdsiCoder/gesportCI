@@ -25,8 +25,8 @@ class Reserva extends CI_Controller {
             $datases["usu"] = $_SESSION['e_nombre'];
         } elseif(isset($_SESSION['a_nombre'])) {
             $datases["usu"] = $_SESSION['a_nombre'];
-        } elseif(isset($_SESSION['d_id'])) {
-            $datases["usu"] = $_SESSION['d_id'];
+        } elseif(isset($_SESSION['d_nombre'])) {
+            $datases["usu"] = $_SESSION['d_nombre'];
         }
         
         // $data["deportistas_data"] = $this->mdeportista->lista();
@@ -88,8 +88,8 @@ class Reserva extends CI_Controller {
             $datases["usu"] = $_SESSION['e_nombre'];
         } elseif(isset($_SESSION['a_nombre'])) {
             $datases["usu"] = $_SESSION['a_nombre'];
-        } elseif(isset($_SESSION['d_id'])) {
-            $datases["usu"] = $_SESSION['d_id'];
+        } elseif(isset($_SESSION['d_nombre'])) {
+            $datases["usu"] = $_SESSION['d_nombre'];
         }
         
         $data["listclub"] = $this->mclub->listclub();
@@ -98,8 +98,8 @@ class Reserva extends CI_Controller {
     }
 
     public function listSolicitudes() {
-        if(isset($_SESSION['e_id'])) {
-            $datases["usu"] = $_SESSION['e_id'];
+        if(isset($_SESSION['e_nombre'])) {
+            $datases["usu"] = $_SESSION['e_nombre'];
         } elseif(isset($_SESSION['a_nombre'])) {
             $datases["usu"] = $_SESSION['a_nombre'];
             
@@ -132,7 +132,7 @@ class Reserva extends CI_Controller {
         } elseif(isset($_SESSION['a_nombre'])) {
             $this->load->view('layouts/admin/nav', $datases);
         } elseif(isset($_SESSION['d_id'])) {
-            $this->load->view('nav');
+            $this->load->view('layouts/dep/nav', $datases);
         }
         $this->load->view($template, $data);
     }

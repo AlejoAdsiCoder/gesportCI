@@ -27,9 +27,4 @@
                 $this->load->view($template);
             }
         }
-
-        public function res_data() {
-            $datos = $this->mreserva->lista();
-            echo json_encode($datos);
-        }
     }

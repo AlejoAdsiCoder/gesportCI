@@ -168,12 +168,10 @@ $(document).ready(function() {
     var url = '<?php echo base_url() ?>Deportista/edit';
     
     var dep_id = $(this).val();
-    alert(url + '/' + dep_id);
 
      $.ajax({
         url: url + '/' + dep_id,
         success: function (data) {
-          alert(data);
         if(data) {
             var datos = JSON.parse(data);
                 $('#tp').val(datos.tipo_documento);
@@ -289,7 +287,6 @@ $('#delete').on('click',function(){
         dataType : "JSON",
         data : {cedula:code},
         success: function(data) {
-            alert(data);
             $('[name="deportista_delete"]').val("");
             $('#del-dep').modal('hide');
             show_deport();

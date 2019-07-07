@@ -104,6 +104,7 @@
                         <input type="time" min="9:00" max="18:00" id="horafin" name="horafin" class="form-control">
                     </div>
                 </div>
+                <?php if(isset($_SESSION['a_nombre'])) { ?>
                 <div class="form-group col">
                         <label for="estado">Cambiar Estado</label>
                         <select name="estado" class="form-control" id="estado">
@@ -112,6 +113,7 @@
                             <option value='3'>Realizado</option>
                         </select>
                     </div>
+                <?php } ?>
                   
                 <div class="modal-footer">
                   <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>

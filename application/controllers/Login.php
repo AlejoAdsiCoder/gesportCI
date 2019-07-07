@@ -23,10 +23,10 @@ public function check_login(){
             echo base_url()."Admin";
             break;
         case 2:
-            echo base_url()."Deportista";
+            echo base_url()."Dep";
             break;
         case 3:
-            echo base_url()."Reserva";
+            echo base_url()."Ent";
             break;
         default:
             echo "El usuario no existe";

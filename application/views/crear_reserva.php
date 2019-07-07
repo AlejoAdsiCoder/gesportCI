@@ -44,11 +44,11 @@
         <div class="row">
             <div class="col">
                 <label for="horaini">hora Inicio:</label>
-                <input type="time" min="9:00" max="18:00" id="horaini" name="horaini" class="form-control">
+                <input type="text" id="horaini" name="horaini" class="form-control">
             </div>
             <div class="col">
                 <label for="horafin">hora Fin:</label>
-                <input type="time" min="9:00" max="18:00" id="horafin" name="horafin" class="form-control">
+                <input type="text" id="horafin" name="horafin" class="form-control">
             </div>
         </div>
         <div class="form-group">
@@ -97,8 +97,18 @@
 </div>
 </div>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+<script src='<?php echo base_url(); ?>assets/js/bootstrap-datetimepicker.min.js'></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.21.0/moment.min.js" type="text/javascript"></script>
 <script>    
     $(document).ready(function() {
+        $('#horaini').datetimepicker({
+            format: 'LT'
+        });
+        $('#horafin').datetimepicker({
+            format: 'LT'
+        });
 
 $("#escenario").change(function() {
     var id = $(this).find(":selected").val();

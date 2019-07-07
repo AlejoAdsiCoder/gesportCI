@@ -19,7 +19,7 @@ function __construct()
                 $rd = $query3->row();
                 $dep_usu = array(
                     'd_id' => $rd->cedula,
-                    'd_nombre' => $rd->nombre . ", " . $rd->apellidos
+                    'd_nombre' => $rd->nombre . " " . $rd->apellidos
                 );
                 $this->session->set_userdata($dep_usu);
                 return 2;
@@ -28,7 +28,7 @@ function __construct()
                 $re = $query2->row();
                 $ent_usu = array(
                     'e_id' => $re->cedula,
-                    'e_nombre' => $re->nombre . ", " . $re->apellidos
+                    'e_nombre' => $re->nombre . " " . $re->apellidos
                 );
                 $this->session->set_userdata($ent_usu);
                 return 3;

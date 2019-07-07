@@ -11,6 +11,7 @@
   </div>
   <div class="card-body">
 	  <div class="row checkbox">
+	  <?php if(isset($_SESSION['e_nombre'])) { ?>
 			<div class="form-check form-check-inline Checkclub">
 			<input type="checkbox" id="Checkclub" class="form-check-input"><label class="form-check-label" for="Checkclub"> Calendario de su club</label>
 			</div>
@@ -18,7 +19,7 @@
 			<div class="form-check form-check-inline Checkclubes">
 			<input type="checkbox" id="Checkclubes" class="form-check-input"><label class="form-check-label" for="Checkclubes"> Calendario de los clubes</label>
 			</div>
-
+		<?php } ?>
 			<div class="form-group row col-md-8">
 			
 			<div class="row">
@@ -85,12 +86,14 @@
  <h4 class="modal-title">Event Details</h4>
  </div>
  <div id="modalBody" class="modal-body">
- <h4 id="mdTitle" class="modal-title"></h4>
- <p id="mdclub"></p>
- <p id="mdesc"></p>
- <p id="mstate"></p>
- <p id="mdfinicio"></p>
- <p id="mdfin"></p>
+ <strong>Descripción de la Reserva:</strong><p id="mdTitle"></p>
+ <strong>Club:</strong><p id="mdclub"></p>
+ <strong>Escenario deportivo:</strong><p id="mdesc"></p>
+ <strong>Foto escenario deportivo:</strong><br><img style="width:150px" src="" id="mimg"><br><br>
+ <strong>Dirección Escenario:</strong><p id="dir"></p>
+ <strong>Estado de la reserva:</strong><p id="mstate"></p>
+ <strong>Fecha hora inicio:</strong><p id="mdfinicio"></p>
+ <strong>Hora fin:</strong><p id="mdfin"></p>
  </div>
  <input type="hidden" id="eventID"/>
  <div class="modal-footer">
@@ -155,12 +158,30 @@
 							*/
 							$.fullCalendar.moment().locale('es');
 							horaini = $.fullCalendar.moment(event.start).format('dddd, MMMM Do YYYY, h:mm');
-							horafin = $.fullCalendar.moment(event.end).format("dddd, MMMM Do YYYY, h:mm");
+							horafin = $.fullCalendar.moment(event.end).format("h:mm");
 							
+							switch(event.state) {
+								case '1': 
+									state = 'Pendiente Aprobración';
+									break;
+								case '2':
+									state = 'Aprobado';
+									break;
+								case '3':
+									state = 'Realizado';
+									break;
+								default:
+									state = '0';
+									break;
+							}
+							var img = event.imagen;
+
 							$('#mdTitle').html(event.title);
 							$('#mdclub').html(event.club);
 							$('#mdesc').html(event.escenario);
-							$('#mstate').html(event.state)
+							$('#mimg').attr("src", img);
+							$('#dir').html(event.dir)
+							$('#mstate').html(state);
 							$('#mdfinicio').html(horaini);
 							$('#mdfin').html(horafin);
 							$('#detalleModal').modal('show');

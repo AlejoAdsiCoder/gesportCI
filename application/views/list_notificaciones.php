@@ -20,7 +20,7 @@ $(document).ready(function() {
   function show_events() {
         $.ajax({
                 type  : 'ajax',
-                url   : '<?php echo base_url() ?>Admin/res_data',
+                url   : '<?php echo base_url() ?>Reserva/res_data',
                 async : true,
                 dataType : 'json',
                 success : function(data){

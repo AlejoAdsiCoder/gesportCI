@@ -15,14 +15,7 @@
       <div class="dropdown-menu" aria-labelledby="reserva">
         <a class="dropdown-item" href="<?php echo base_url();?>Reserva">Ver calendario</a>
         <a class="dropdown-item" href="<?php echo base_url();?>Reserva/crearReserva">Reservar Escenario deportivo</a>
-      </div>
-      </li>
-      <li class="nav-item dropdown">
-        <a class="nav-link dropdown-toggle" href="<?php echo base_url();?>/lista_deportistas.php" id="deportistas" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Deportistas</a>
-      
-      <div class="dropdown-menu" aria-labelledby="deportistas">
-        <a class="dropdown-item" href="">Administrar</a>
-        <a class="dropdown-item" href="<?php echo base_url();?>Deportista/crearDeportista">Nuevo</a>
+        <a class="dropdown-item" href="<?php echo base_url(); ?>Reserva/listSolicitudes">Ver reservas</a>
       </div>
       </li>
       <li class="nav-item">
